@@ -69,18 +69,6 @@
             height: 100%;
             object-fit: cover;
         }
-        
-        .poster-placeholder {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 100%;
-            height: 100%;
-            font-size: 72px;
-            font-weight: bold;
-            color: #000;
-            font-family: 'Montserrat', sans-serif;
-        }
 
         .title-info { flex: 1; min-width: 300px; }
         
@@ -155,6 +143,83 @@
             font-weight: 700;
         }
 
+        /* INFO GRID */
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            background: #1a1a1a;
+            padding: 30px;
+            border-radius: 12px;
+            border: 1px solid #333;
+        }
+
+        .info-item {
+            display: flex;
+            gap: 15px;
+        }
+
+        .info-label {
+            color: #888;
+            min-width: 100px;
+            font-weight: 500;
+        }
+
+        .info-value {
+            color: #fff;
+            font-weight: 600;
+        }
+
+        /* PLOT SUMMARY */
+        .plot-box {
+            background: #1a1a1a;
+            padding: 30px;
+            border-radius: 12px;
+            border: 1px solid #333;
+            line-height: 1.8;
+            color: #ddd;
+        }
+
+        /* SEASONS */
+        .seasons-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .season-card {
+            background: linear-gradient(135deg, #1a1a1a 0%, #252525 100%);
+            padding: 25px;
+            border-radius: 12px;
+            border: 1px solid #333;
+            transition: all 0.3s;
+        }
+
+        .season-card:hover {
+            border-color: #f5c518;
+            transform: translateY(-5px);
+        }
+
+        .season-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 20px;
+            font-weight: 700;
+            color: #f5c518;
+            margin-bottom: 10px;
+        }
+
+        .season-subtitle {
+            color: #aaa;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+
+        .season-desc {
+            color: #ccc;
+            line-height: 1.6;
+            font-size: 14px;
+        }
+
         .stats-grid { 
             display: grid; 
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); 
@@ -192,7 +257,7 @@
             line-height: 1.8;
         }
 
-        /* GENRE CHART STYLES */
+        /* GENRE CHART */
         .genre-chart {
             background: #1a1a1a;
             padding: 30px;
@@ -242,7 +307,7 @@
             color: #000;
         }
 
-        /* NGL-STYLE FLOATING REVIEWS */
+        /* REVIEWS */
         .reviews-container {
             position: relative;
             min-height: 400px;
@@ -251,12 +316,12 @@
         
         .review-bubble {
             background: linear-gradient(135deg, #1a1a1a 0%, #252525 100%);
-            padding: 20px 25px;
+            padding: 25px;
             border-radius: 20px;
             border: 1px solid #333;
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
-            margin-bottom: 20px;
-            max-width: 600px;
+            margin-bottom: 25px;
+            max-width: 650px;
             position: relative;
             animation: fadeInUp 0.6s ease-out;
             transition: all 0.3s;
@@ -278,11 +343,48 @@
             margin-right: 0;
         }
         
-        .review-bubble-text {
+        .review-main-text {
+            color: #fff;
+            font-size: 17px;
+            line-height: 1.7;
+            margin-bottom: 20px;
+            font-style: italic;
+            padding: 15px;
+            background: #0f0f0f;
+            border-radius: 10px;
+            border-left: 4px solid #f5c518;
+        }
+
+        .review-details {
+            display: grid;
+            gap: 12px;
+        }
+
+        .review-detail-box {
+            background: #0f0f0f;
+            padding: 12px 15px;
+            border-radius: 8px;
+            border-left: 3px solid var(--box-color, #888);
+        }
+
+        .review-detail-box.pros { --box-color: #4ade80; }
+        .review-detail-box.cons { --box-color: #f87171; }
+        .review-detail-box.best { --box-color: #60a5fa; }
+        .review-detail-box.improve { --box-color: #fbbf24; }
+
+        .detail-label {
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 6px;
+            color: var(--box-color, #888);
+        }
+
+        .detail-text {
             color: #ddd;
-            font-size: 16px;
-            line-height: 1.6;
-            position: relative;
+            font-size: 14px;
+            line-height: 1.5;
         }
         
         @keyframes fadeInUp {
@@ -363,8 +465,67 @@
             </div>
         </div>
 
+        <!-- RELEASE INFO -->
         <div class="section">
-            <h2 class="section-title">College Statistics</h2>
+            <h2 class="section-title">Release Info</h2>
+            <div class="info-grid">
+                <div class="info-item">
+                    <span class="info-label">Release Year:</span>
+                    <span class="info-value">1946</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">Seasons:</span>
+                    <span class="info-value">4</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">Episodes:</span>
+                    <span class="info-value">∞ (Ongoing)</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">Runtime:</span>
+                    <span class="info-value">5.5 years per viewer</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- PLOT SUMMARY -->
+        <div class="section">
+            <h2 class="section-title">Plot Summary</h2>
+            <div class="plot-box">
+                Set in the heart of Mumbai, <strong>Topiwala National Medical College</strong> follows a rotating cast of idealistic students as they navigate academic pressure, hierarchy, sleep deprivation, ethical dilemmas, and moments of quiet triumph. What begins as a dream slowly evolves into a test of resilience, character, and purpose.
+            </div>
+        </div>
+
+        <!-- SEASONS -->
+        <div class="section">
+            <h2 class="section-title">Seasons & Arcs</h2>
+            <div class="seasons-grid">
+                <div class="season-card">
+                    <div class="season-title">Season 1: First Year</div>
+                    <div class="season-subtitle">Discovery & Shock</div>
+                    <div class="season-desc">The journey begins. Wide-eyed newcomers face their first cadavers, endless lectures, and the realization that medical school is nothing like they imagined.</div>
+                </div>
+                <div class="season-card">
+                    <div class="season-title">Season 2: Second Year</div>
+                    <div class="season-subtitle">Pressure Builds</div>
+                    <div class="season-desc">The workload intensifies. Students juggle clinical postings, university exams, and the growing weight of responsibility as they encounter real patients.</div>
+                </div>
+                <div class="season-card">
+                    <div class="season-title">Season 3: Final Year</div>
+                    <div class="season-subtitle">Identity Crisis</div>
+                    <div class="season-desc">The stakes are higher than ever. With final exams looming and career decisions on the horizon, students question everything they thought they knew.</div>
+                </div>
+                <div class="season-card">
+                    <div class="season-title">Season 4: Internship</div>
+                    <div class="season-subtitle">Reality Hits</div>
+                    <div class="season-desc">The ultimate test. Now responsible for actual patient care, interns discover who they truly are under pressure—and whether medicine is really their calling.</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- STATISTICS -->
+        <div class="section">
+            <h2 class="section-title">Audience Statistics</h2>
             <div class="stats-grid">
                 <div class="stat-card">
                     <div class="stat-number" id="totalReviews">--</div>
@@ -381,6 +542,7 @@
             </div>
         </div>
 
+        <!-- GENRE DISTRIBUTION -->
         <div class="section">
             <h2 class="section-title">Genre Distribution</h2>
             <div class="genre-chart" id="genreChart">
@@ -388,6 +550,7 @@
             </div>
         </div>
 
+        <!-- STUDENT REVIEWS -->
         <div class="section">
             <h2 class="section-title">Student Reviews</h2>
             <div class="reviews-container" id="reviewsContainer">
@@ -402,7 +565,11 @@
         const COLUMNS = {
             rating: 'Overall Rating',
             genre: 'Genres of TNMC (for you)',
-            review: 'Write a one line Review of TNMC'
+            review: 'Write a one line Review of TNMC',
+            pros: 'Pros (what works)',
+            cons: 'Cons (What needs improvement)',
+            best: 'Best thing about TNMC',
+            improve: 'One thing TNMC desperately needs to improve'
         };
 
         const debugBox = document.getElementById('debug-box');
@@ -415,23 +582,8 @@
                 const data = parseCSVRobust(csvText);
                 
                 if (data.length > 0) {
-                    const foundHeaders = Object.keys(data[0]);
-                    const missing = [];
-                    if (!foundHeaders.includes(COLUMNS.rating)) missing.push(COLUMNS.rating);
-                    if (!foundHeaders.includes(COLUMNS.genre)) missing.push(COLUMNS.genre);
-                    if (!foundHeaders.includes(COLUMNS.review)) missing.push(COLUMNS.review);
-
-                    if (missing.length > 0) {
-                        showDebug(`
-                            <strong>⚠️ COLUMN MISMATCH ERROR</strong><br>
-                            Your Google Sheet has these columns: <br> [ ${foundHeaders.join(' | ')} ]<br><br>
-                            But your code is looking for: <br> [ ${missing.join(', ')} ]<br><br>
-                            <strong>FIX:</strong> Update the "COLUMNS" section in the script to match the names found in your sheet exactly.
-                        `, true);
-                    } else {
-                        showDebug(`✅ Success! Connected to sheet. Found ${data.length} rows.`, false);
-                        setTimeout(() => { debugBox.style.display = 'none'; }, 3000);
-                    }
+                    showDebug(`✅ Success! Connected to sheet. Found ${data.length} rows.`, false);
+                    setTimeout(() => { debugBox.style.display = 'none'; }, 3000);
                 }
 
                 displayData(data);
@@ -498,13 +650,8 @@
         }
 
         function displayData(data) {
-            const ratingKey = COLUMNS.rating;
-            const genreKey = COLUMNS.genre;
-            const reviewKey = COLUMNS.review;
-
-            // Calculate ratings
             const ratings = data
-                .map(row => parseInt(row[ratingKey]))
+                .map(row => parseInt(row[COLUMNS.rating]))
                 .filter(r => !isNaN(r) && r > 0);
             
             const avgRating = ratings.length > 0 
@@ -516,27 +663,24 @@
             document.getElementById('totalReviews').textContent = data.length;
             document.getElementById('avgScore').textContent = avgRating + '/10';
 
-            // Process genres from sheet data
+            // Process genres
             let allGenres = [];
             data.forEach(row => {
-                if (row[genreKey]) {
-                    const genresInRow = row[genreKey].split(',').map(g => g.trim()).filter(g => g && g !== 'Other:');
+                if (row[COLUMNS.genre]) {
+                    const genresInRow = row[COLUMNS.genre].split(',').map(g => g.trim()).filter(g => g && g !== 'Other:');
                     allGenres.push(...genresInRow);
                 }
             });
 
-            // Count genre occurrences
             const genreCounts = {};
             allGenres.forEach(g => {
                 genreCounts[g] = (genreCounts[g] || 0) + 1;
             });
 
-            // Sort by count
             const sortedGenres = Object.entries(genreCounts).sort((a, b) => b[1] - a[1]);
             const topGenres = sortedGenres.slice(0, 8);
             const top3Genres = sortedGenres.slice(0, 3);
 
-            // Display top 3 in stats
             const topGenresText = document.getElementById('topGenresText');
             if (top3Genres.length > 0) {
                 topGenresText.innerHTML = top3Genres.map(([genre]) => `⭐ ${genre}`).join('<br>');
@@ -544,7 +688,6 @@
                 topGenresText.textContent = 'No data yet';
             }
 
-            // Display genre chart
             const genreChart = document.getElementById('genreChart');
             if (topGenres.length > 0) {
                 const maxCount = topGenres[0][1];
@@ -568,8 +711,8 @@
                 genreChart.innerHTML = '<div class="loading">No genre data yet</div>';
             }
 
-            // Display reviews - NGL style (only review text)
-            const validReviews = data.filter(row => row[reviewKey] && row[reviewKey].trim().length > 0);
+            // Display reviews with all details
+            const validReviews = data.filter(row => row[COLUMNS.review] && row[COLUMNS.review].trim().length > 0);
             const reviewsContainer = document.getElementById('reviewsContainer');
             
             if (validReviews.length === 0) {
@@ -578,17 +721,48 @@
             }
 
             reviewsContainer.innerHTML = validReviews.reverse().slice(0, 30).map(row => {
-                const reviewText = row[reviewKey];
+                const reviewText = row[COLUMNS.review];
+                const pros = row[COLUMNS.pros];
+                const cons = row[COLUMNS.cons];
+                const best = row[COLUMNS.best];
+                const improve = row[COLUMNS.improve];
+
                 return `
                     <div class="review-bubble">
-                        <div class="review-bubble-text">${reviewText}</div>
+                        <div class="review-main-text">"${reviewText}"</div>
+                        <div class="review-details">
+                            ${pros ? `
+                                <div class="review-detail-box pros">
+                                    <div class="detail-label">✓ Pros</div>
+                                    <div class="detail-text">${pros}</div>
+                                </div>
+                            ` : ''}
+                            ${cons ? `
+                                <div class="review-detail-box cons">
+                                    <div class="detail-label">✗ Cons</div>
+                                    <div class="detail-text">${cons}</div>
+                                </div>
+                            ` : ''}
+                            ${best ? `
+                                <div class="review-detail-box best">
+                                    <div class="detail-label">⭐ Best Thing</div>
+                                    <div class="detail-text">${best}</div>
+                                </div>
+                            ` : ''}
+                            ${improve ? `
+                                <div class="review-detail-box improve">
+                                    <div class="detail-label">⚠ Needs Improvement</div>
+                                    <div class="detail-text">${improve}</div>
+                                </div>
+                            ` : ''}
+                        </div>
                     </div>
                 `;
             }).join('');
         }
 
         fetchData();
-        setInterval(fetchData, 300000); // Refresh every 5 minutes
+        setInterval(fetchData, 300000);
     </script>
 </body>
 </html>
