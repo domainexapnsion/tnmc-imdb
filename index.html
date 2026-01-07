@@ -157,7 +157,7 @@
 
         .stats-grid { 
             display: grid; 
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); 
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); 
             gap: 25px; 
             margin-top: 25px; 
         }
@@ -184,6 +184,13 @@
         }
         
         .stat-label { color: #aaa; margin-top: 8px; font-size: 15px; }
+        
+        .top-genres-list {
+            margin-top: 15px;
+            font-size: 14px;
+            color: #ccc;
+            line-height: 1.8;
+        }
 
         /* GENRE CHART STYLES */
         .genre-chart {
@@ -235,105 +242,58 @@
             color: #000;
         }
 
-        /* REVIEWS */
-        .reviews-container { display: grid; gap: 25px; }
+        /* NGL-STYLE FLOATING REVIEWS */
+        .reviews-container {
+            position: relative;
+            min-height: 400px;
+            padding: 20px 0;
+        }
         
-        .review-card { 
-            background: linear-gradient(135deg, #1a1a1a 0%, #1f1f1f 100%);
-            padding: 25px; 
-            border-radius: 12px; 
-            border-left: 5px solid #f5c518;
-            border: 1px solid #2a2a2a;
+        .review-bubble {
+            background: linear-gradient(135deg, #1a1a1a 0%, #252525 100%);
+            padding: 20px 25px;
+            border-radius: 20px;
+            border: 1px solid #333;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+            margin-bottom: 20px;
+            max-width: 600px;
+            position: relative;
+            animation: fadeInUp 0.6s ease-out;
             transition: all 0.3s;
         }
         
-        .review-card:hover {
+        .review-bubble:hover {
+            transform: translateY(-5px);
             border-color: #f5c518;
-            transform: translateX(5px);
+            box-shadow: 0 8px 30px rgba(245, 197, 24, 0.2);
         }
         
-        .review-header { 
-            display: flex; 
-            justify-content: space-between; 
-            align-items: center; 
-            margin-bottom: 20px; 
-            flex-wrap: wrap; 
-            gap: 10px;
-            padding-bottom: 15px;
-            border-bottom: 1px solid #2a2a2a;
+        .review-bubble:nth-child(odd) {
+            margin-left: 0;
+            margin-right: auto;
         }
         
-        .reviewer-info {
-            display: flex;
-            align-items: center;
-            gap: 10px;
+        .review-bubble:nth-child(even) {
+            margin-left: auto;
+            margin-right: 0;
         }
         
-        .reviewer-avatar {
-            width: 45px;
-            height: 45px;
-            background: linear-gradient(135deg, #f5c518 0%, #e6b800 100%);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 700;
-            color: #000;
-            font-size: 18px;
-        }
-        
-        .reviewer-name { 
-            font-weight: 600; 
-            font-size: 17px;
-            color: #fff;
-        }
-        
-        .review-rating { 
-            color: #f5c518; 
-            font-size: 22px;
-            font-weight: 700;
-        }
-        
-        .review-content {
+        .review-bubble-text {
             color: #ddd;
-            line-height: 1.8;
-        }
-        
-        .review-text {
             font-size: 16px;
-            font-style: italic;
-            margin-bottom: 20px;
-            padding: 15px;
-            background: #0f0f0f;
-            border-radius: 8px;
-            border-left: 3px solid #f5c518;
-        }
-        
-        .review-details {
-            display: grid;
-            gap: 15px;
-            margin-top: 15px;
-        }
-        
-        .review-detail-item {
-            background: #0f0f0f;
-            padding: 12px 15px;
-            border-radius: 8px;
-            font-size: 14px;
-        }
-        
-        .review-detail-label {
-            color: #f5c518;
-            font-weight: 700;
-            margin-bottom: 5px;
-            font-size: 13px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-        
-        .review-detail-text {
-            color: #ccc;
             line-height: 1.6;
+            position: relative;
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
         
         .loading { text-align: center; padding: 40px; color: #888; }
@@ -357,6 +317,12 @@
             .rating-score { font-size: 48px; }
             .site-title { font-size: 28px; }
             .section-title { font-size: 26px; }
+            
+            .review-bubble:nth-child(odd),
+            .review-bubble:nth-child(even) {
+                margin-left: auto;
+                margin-right: auto;
+            }
         }
     </style>
 </head>
@@ -364,7 +330,6 @@
     <div class="header">
         <div class="container">
             <div class="logo-container">
-                <!-- Replace with your actual logo URL -->
                 <img src="https://via.placeholder.com/80x80/f5c518/000000?text=TNMC" alt="TNMC Logo" class="logo-img">
                 <div>
                     <div class="site-title">TNMC IMDb</div>
@@ -379,10 +344,7 @@
     <div class="container">
         <div class="title-section">
             <div class="poster">
-                <!-- Replace with your actual poster URL -->
                 <img src="https://via.placeholder.com/300x450/f5c518/000000?text=TNMC" alt="TNMC Poster" class="poster-img">
-                <!-- Or use placeholder text if no image -->
-                <!-- <div class="poster-placeholder">TNMC</div> -->
             </div>
             <div class="title-info">
                 <h1>TNMC Experience</h1>
@@ -413,8 +375,8 @@
                     <div class="stat-label">Average Rating</div>
                 </div>
                 <div class="stat-card">
-                    <div class="stat-number" id="participationRate">--%</div>
-                    <div class="stat-label">Participation</div>
+                    <div class="stat-number" style="font-size: 24px;" id="topGenresText">Loading...</div>
+                    <div class="stat-label">Top Genres</div>
                 </div>
             </div>
         </div>
@@ -540,6 +502,7 @@
             const genreKey = COLUMNS.genre;
             const reviewKey = COLUMNS.review;
 
+            // Calculate ratings
             const ratings = data
                 .map(row => parseInt(row[ratingKey]))
                 .filter(r => !isNaN(r) && r > 0);
@@ -552,23 +515,36 @@
             document.getElementById('ratingCount').textContent = `${ratings.length} ratings`;
             document.getElementById('totalReviews').textContent = data.length;
             document.getElementById('avgScore').textContent = avgRating + '/10';
-            document.getElementById('participationRate').textContent = '85%';
 
-            // Genres with horizontal bars
+            // Process genres from sheet data
             let allGenres = [];
             data.forEach(row => {
                 if (row[genreKey]) {
-                    row[genreKey].split(',').forEach(g => {
-                        const clean = g.trim();
-                        if (clean && clean !== 'Other:') allGenres.push(clean);
-                    });
+                    const genresInRow = row[genreKey].split(',').map(g => g.trim()).filter(g => g && g !== 'Other:');
+                    allGenres.push(...genresInRow);
                 }
             });
 
+            // Count genre occurrences
             const genreCounts = {};
-            allGenres.forEach(g => genreCounts[g] = (genreCounts[g] || 0) + 1);
-            const topGenres = Object.entries(genreCounts).sort((a, b) => b[1] - a[1]).slice(0, 8);
-            
+            allGenres.forEach(g => {
+                genreCounts[g] = (genreCounts[g] || 0) + 1;
+            });
+
+            // Sort by count
+            const sortedGenres = Object.entries(genreCounts).sort((a, b) => b[1] - a[1]);
+            const topGenres = sortedGenres.slice(0, 8);
+            const top3Genres = sortedGenres.slice(0, 3);
+
+            // Display top 3 in stats
+            const topGenresText = document.getElementById('topGenresText');
+            if (top3Genres.length > 0) {
+                topGenresText.innerHTML = top3Genres.map(([genre]) => `⭐ ${genre}`).join('<br>');
+            } else {
+                topGenresText.textContent = 'No data yet';
+            }
+
+            // Display genre chart
             const genreChart = document.getElementById('genreChart');
             if (topGenres.length > 0) {
                 const maxCount = topGenres[0][1];
@@ -592,8 +568,8 @@
                 genreChart.innerHTML = '<div class="loading">No genre data yet</div>';
             }
 
-            // Reviews
-            const validReviews = data.filter(row => row[reviewKey] || row[ratingKey]);
+            // Display reviews - NGL style (only review text)
+            const validReviews = data.filter(row => row[reviewKey] && row[reviewKey].trim().length > 0);
             const reviewsContainer = document.getElementById('reviewsContainer');
             
             if (validReviews.length === 0) {
@@ -601,46 +577,11 @@
                 return;
             }
 
-            reviewsContainer.innerHTML = validReviews.reverse().slice(0, 20).map((row, index) => {
-                const rating = row[ratingKey] || '?';
-                const reviewText = row[reviewKey] || 'No review provided';
-                const numRating = parseInt(rating) || 0;
-                const stars = '★'.repeat(numRating) + '☆'.repeat(10 - numRating);
-                const avatarLetter = String.fromCharCode(65 + (index % 26));
-
-                // Extract all form fields for detailed review
-                const allFields = Object.entries(row)
-                    .filter(([key, value]) => 
-                        value && 
-                        key !== ratingKey && 
-                        key !== reviewKey && 
-                        key !== 'Timestamp' &&
-                        !key.includes('Email') &&
-                        value.length > 0
-                    );
-
+            reviewsContainer.innerHTML = validReviews.reverse().slice(0, 30).map(row => {
+                const reviewText = row[reviewKey];
                 return `
-                    <div class="review-card">
-                        <div class="review-header">
-                            <div class="reviewer-info">
-                                <div class="reviewer-avatar">${avatarLetter}</div>
-                                <div class="reviewer-name">Student Review #${validReviews.length - index}</div>
-                            </div>
-                            <div class="review-rating">${stars} ${rating}/10</div>
-                        </div>
-                        <div class="review-content">
-                            <div class="review-text">"${reviewText}"</div>
-                            ${allFields.length > 0 ? `
-                                <div class="review-details">
-                                    ${allFields.map(([label, value]) => `
-                                        <div class="review-detail-item">
-                                            <div class="review-detail-label">${label}</div>
-                                            <div class="review-detail-text">${value}</div>
-                                        </div>
-                                    `).join('')}
-                                </div>
-                            ` : ''}
-                        </div>
+                    <div class="review-bubble">
+                        <div class="review-bubble-text">${reviewText}</div>
                     </div>
                 `;
             }).join('');
