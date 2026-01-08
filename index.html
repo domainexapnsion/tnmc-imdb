@@ -663,19 +663,27 @@
             document.getElementById('totalReviews').textContent = data.length;
             document.getElementById('avgScore').textContent = avgRating + '/10';
 
-            // Process genres
+            // Process genres - handle multiple genres per response
             let allGenres = [];
             data.forEach(row => {
                 if (row[COLUMNS.genre]) {
-                    const genresInRow = row[COLUMNS.genre].split(',').map(g => g.trim()).filter(g => g && g !== 'Other:');
+                    // Split by comma and clean each genre
+                    const genresInRow = row[COLUMNS.genre]
+                        .split(',')
+                        .map(g => g.trim())
+                        .filter(g => g && g.length > 0 && !g.toLowerCase().includes('other'));
+                    
                     allGenres.push(...genresInRow);
                 }
             });
 
+            // Count each genre occurrence
             const genreCounts = {};
             allGenres.forEach(g => {
                 genreCounts[g] = (genreCounts[g] || 0) + 1;
             });
+
+            console.log('Genre counts:', genreCounts); // Debug log
 
             const sortedGenres = Object.entries(genreCounts).sort((a, b) => b[1] - a[1]);
             const topGenres = sortedGenres.slice(0, 8);
