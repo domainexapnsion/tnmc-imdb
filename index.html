@@ -13,22 +13,22 @@
             color: #ffffff; 
             line-height: 1.6; 
         }
-        
+
         .header { 
             background-color: #000000; 
             padding: 15px 0; 
             border-bottom: 1px solid #333;
             box-shadow: 0 2px 10px rgba(0,0,0,0.5);
         }
-        
+
         .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
-        
+
         .logo-container {
             display: flex;
             align-items: center;
             gap: 15px;
         }
-        
+
         .logo-img {
             width: 80px;
             height: 80px;
@@ -37,7 +37,7 @@
             padding: 5px;
             border-radius: 4px;
         }
-        
+
         .site-title {
             font-family: 'Montserrat', sans-serif;
             font-weight: 800;
@@ -45,7 +45,7 @@
             color: #f5c518;
             letter-spacing: -1px;
         }
-        
+
         .title-section { 
             display: flex; 
             align-items: flex-start; 
@@ -53,7 +53,7 @@
             margin-top: 40px; 
             flex-wrap: wrap; 
         }
-        
+
         .poster {
             width: 300px; 
             height: 450px;
@@ -63,7 +63,7 @@
             overflow: hidden;
             position: relative;
         }
-        
+
         .poster-img {
             width: 100%;
             height: 100%;
@@ -71,7 +71,7 @@
         }
 
         .title-info { flex: 1; min-width: 300px; }
-        
+
         h1 { 
             font-family: 'Montserrat', sans-serif;
             font-size: 52px; 
@@ -79,7 +79,7 @@
             font-weight: 800;
             letter-spacing: -1px;
         }
-        
+
         .subtitle { 
             color: #aaa; 
             font-size: 20px; 
@@ -96,7 +96,7 @@
             border: 1px solid #333;
             box-shadow: 0 4px 20px rgba(245, 197, 24, 0.1);
         }
-        
+
         .rating-score { 
             font-size: 64px; 
             font-weight: bold; 
@@ -106,7 +106,7 @@
             gap: 10px;
             font-family: 'Montserrat', sans-serif;
         }
-        
+
         .rating-score span { font-size: 28px; color: #888; }
         .rating-count { color: #aaa; margin-top: 8px; font-size: 15px; }
 
@@ -125,7 +125,7 @@
             box-shadow: 0 4px 15px rgba(245, 197, 24, 0.3);
             font-family: 'Roboto', sans-serif;
         }
-        
+
         .cta-button:hover { 
             background-color: #ffd700;
             transform: translateY(-2px);
@@ -133,7 +133,7 @@
         }
 
         .section { margin: 50px 0; }
-        
+
         .section-title { 
             font-family: 'Montserrat', sans-serif;
             font-size: 32px; 
@@ -143,7 +143,6 @@
             font-weight: 700;
         }
 
-        /* INFO GRID */
         .info-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -170,7 +169,6 @@
             font-weight: 600;
         }
 
-        /* PLOT SUMMARY */
         .plot-box {
             background: #1a1a1a;
             padding: 30px;
@@ -180,7 +178,6 @@
             color: #ddd;
         }
 
-        /* SEASONS */
         .seasons-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -226,7 +223,7 @@
             gap: 25px; 
             margin-top: 25px; 
         }
-        
+
         .stat-card { 
             background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
             padding: 30px; 
@@ -235,57 +232,49 @@
             border: 1px solid #333;
             transition: transform 0.3s;
         }
-        
+
         .stat-card:hover {
             transform: translateY(-5px);
             border-color: #f5c518;
         }
-        
+
         .stat-number { 
             font-size: 48px; 
             font-weight: 800; 
             color: #f5c518;
             font-family: 'Montserrat', sans-serif;
         }
-        
-        .stat-label { color: #aaa; margin-top: 8px; font-size: 15px; }
-        
-        .top-genres-list {
-            margin-top: 15px;
-            font-size: 14px;
-            color: #ccc;
-            line-height: 1.8;
-        }
 
-        /* GENRE CHART */
+        .stat-label { color: #aaa; margin-top: 8px; font-size: 15px; }
+
         .genre-chart {
             background: #1a1a1a;
             padding: 30px;
             border-radius: 12px;
             border: 1px solid #333;
         }
-        
+
         .genre-bar-item {
             margin-bottom: 20px;
         }
-        
+
         .genre-label {
             display: flex;
             justify-content: space-between;
             margin-bottom: 8px;
             font-size: 15px;
         }
-        
+
         .genre-name {
             font-weight: 500;
             color: #fff;
         }
-        
+
         .genre-count {
             color: #f5c518;
             font-weight: 700;
         }
-        
+
         .genre-bar-bg {
             background: #2a2a2a;
             height: 32px;
@@ -293,7 +282,7 @@
             overflow: hidden;
             position: relative;
         }
-        
+
         .genre-bar-fill {
             background: linear-gradient(90deg, #f5c518 0%, #ffd700 100%);
             height: 100%;
@@ -307,13 +296,12 @@
             color: #000;
         }
 
-        /* REVIEWS */
         .reviews-container {
             position: relative;
             min-height: 400px;
             padding: 20px 0;
         }
-        
+
         .review-bubble {
             background: linear-gradient(135deg, #1a1a1a 0%, #252525 100%);
             padding: 25px;
@@ -326,23 +314,23 @@
             animation: fadeInUp 0.6s ease-out;
             transition: all 0.3s;
         }
-        
+
         .review-bubble:hover {
             transform: translateY(-5px);
             border-color: #f5c518;
             box-shadow: 0 8px 30px rgba(245, 197, 24, 0.2);
         }
-        
+
         .review-bubble:nth-child(odd) {
             margin-left: 0;
             margin-right: auto;
         }
-        
+
         .review-bubble:nth-child(even) {
             margin-left: auto;
             margin-right: 0;
         }
-        
+
         .review-main-text {
             color: #fff;
             font-size: 17px;
@@ -386,7 +374,7 @@
             font-size: 14px;
             line-height: 1.5;
         }
-        
+
         @keyframes fadeInUp {
             from {
                 opacity: 0;
@@ -397,7 +385,7 @@
                 transform: translateY(0);
             }
         }
-        
+
         .loading { text-align: center; padding: 40px; color: #888; }
 
         #debug-box {
@@ -419,7 +407,7 @@
             .rating-score { font-size: 48px; }
             .site-title { font-size: 28px; }
             .section-title { font-size: 26px; }
-            
+
             .review-bubble:nth-child(odd),
             .review-bubble:nth-child(even) {
                 margin-left: auto;
@@ -451,7 +439,7 @@
             <div class="title-info">
                 <h1>TNMC Experience</h1>
                 <p class="subtitle">The Ultimate Medical College Journey</p>
-                
+
                 <div class="rating-box">
                     <div class="rating-score">
                         ★ <span id="avgRating">--</span><span>/10</span>
@@ -465,7 +453,6 @@
             </div>
         </div>
 
-        <!-- RELEASE INFO -->
         <div class="section">
             <h2 class="section-title">Release Info</h2>
             <div class="info-grid">
@@ -488,7 +475,6 @@
             </div>
         </div>
 
-        <!-- PLOT SUMMARY -->
         <div class="section">
             <h2 class="section-title">Plot Summary</h2>
             <div class="plot-box">
@@ -496,7 +482,6 @@
             </div>
         </div>
 
-        <!-- SEASONS -->
         <div class="section">
             <h2 class="section-title">Seasons & Arcs</h2>
             <div class="seasons-grid">
@@ -523,7 +508,6 @@
             </div>
         </div>
 
-        <!-- STATISTICS -->
         <div class="section">
             <h2 class="section-title">Audience Statistics</h2>
             <div class="stats-grid">
@@ -542,7 +526,6 @@
             </div>
         </div>
 
-        <!-- GENRE DISTRIBUTION -->
         <div class="section">
             <h2 class="section-title">Genre Distribution</h2>
             <div class="genre-chart" id="genreChart">
@@ -550,7 +533,6 @@
             </div>
         </div>
 
-        <!-- STUDENT REVIEWS -->
         <div class="section">
             <h2 class="section-title">Student Reviews</h2>
             <div class="reviews-container" id="reviewsContainer">
@@ -564,7 +546,7 @@
 
         const COLUMNS = {
             rating: 'Overall Rating',
-            genre: 'Genres of TNMC (for you)',
+            genre: 'Genres of TNMC(for you)',
             review: 'Write a one line Review of TNMC',
             pros: 'Pros (what works)',
             cons: 'Cons (What needs improvement)',
@@ -574,16 +556,35 @@
 
         const debugBox = document.getElementById('debug-box');
 
-        async function fetchData() {
+                async function fetchData() {
             try {
                 const response = await fetch(SHEET_URL);
                 if (!response.ok) throw new Error(`HTTP Error: ${response.status}`);
                 const csvText = await response.text();
                 const data = parseCSVRobust(csvText);
-                
+
                 if (data.length > 0) {
-                    showDebug(`✅ Success! Connected to sheet. Found ${data.length} rows.`, false);
-                    setTimeout(() => { debugBox.style.display = 'none'; }, 3000);
+                    // --- START AUTO-DETECT HEADERS ---
+                    // This section looks at the REAL headers from the sheet
+                    // and updates your COLUMNS mapping automatically.
+                    const realHeaders = Object.keys(data[0]);
+                    
+                    // Helper to find a header containing a specific word
+                    const find = (word) => realHeaders.find(h => h.toLowerCase().includes(word.toLowerCase()));
+
+                    // Update the global COLUMNS object with the headers we actually found
+                    if (find('rating')) COLUMNS.rating = find('rating');
+                    if (find('genres')) COLUMNS.genre = find('genres');
+                    if (find('review')) COLUMNS.review = find('review');
+                    if (find('pros'))   COLUMNS.pros = find('pros');
+                    if (find('cons'))   COLUMNS.cons = find('cons');
+                    if (find('best'))   COLUMNS.best = find('best');
+                    if (find('improve')) COLUMNS.improve = find('improve');
+                    
+                    // Debug: Print what we found to your red debug box
+                    showDebug(`✅ Connected! <br>Found Genre Column: "${COLUMNS.genre}"`, false);
+                    setTimeout(() => { debugBox.style.display = 'none'; }, 5000); // Hide after 5s
+                    // --- END AUTO-DETECT HEADERS ---
                 }
 
                 displayData(data);
@@ -594,6 +595,7 @@
                 showDebug(`❌ CRITICAL ERROR: ${error.message}`, true);
             }
         }
+
 
         function showDebug(msg, isError) {
             debugBox.style.display = 'block';
@@ -606,7 +608,7 @@
             let currentRow = [];
             let currentField = '';
             let insideQuotes = false;
-            
+
             text = text.replace(/\r\n/g, '\n').replace(/\r/g, '\n');
 
             for (let i = 0; i < text.length; i++) {
@@ -653,7 +655,7 @@
             const ratings = data
                 .map(row => parseInt(row[COLUMNS.rating]))
                 .filter(r => !isNaN(r) && r > 0);
-            
+
             const avgRating = ratings.length > 0 
                 ? (ratings.reduce((a, b) => a + b, 0) / ratings.length).toFixed(1) 
                 : 0;
@@ -671,8 +673,8 @@
                     const genresInRow = row[COLUMNS.genre]
                         .split(',')
                         .map(g => g.trim())
-                        .filter(g => g && g.length > 0 && !g.toLowerCase().includes('other'));
-                    
+                        .filter(g => g && g.length > 0);
+
                     allGenres.push(...genresInRow);
                 }
             });
@@ -683,7 +685,9 @@
                 genreCounts[g] = (genreCounts[g] || 0) + 1;
             });
 
-            console.log('Genre counts:', genreCounts); // Debug log
+            console.log('All genres found:', allGenres);
+            console.log('Genre counts:', genreCounts);
+            console.log('Sample row genre data:', data[0] ? data[0][COLUMNS.genre] : 'No data');
 
             const sortedGenres = Object.entries(genreCounts).sort((a, b) => b[1] - a[1]);
             const topGenres = sortedGenres.slice(0, 8);
@@ -722,7 +726,7 @@
             // Display reviews with all details
             const validReviews = data.filter(row => row[COLUMNS.review] && row[COLUMNS.review].trim().length > 0);
             const reviewsContainer = document.getElementById('reviewsContainer');
-            
+
             if (validReviews.length === 0) {
                 reviewsContainer.innerHTML = '<div class="loading">No reviews found yet. Be the first!</div>';
                 return;
