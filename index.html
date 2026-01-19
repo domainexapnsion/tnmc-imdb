@@ -7,43 +7,96 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
+        
         body { 
             font-family: 'Roboto', Arial, sans-serif; 
-            background-color: #121212; 
+            background: linear-gradient(180deg, #0a0a0a 0%, #1a1a1a 100%);
             color: #ffffff; 
-            line-height: 1.6; 
+            line-height: 1.6;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Animated background particles */
+        .bg-particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.15;
+        }
+
+        .particle {
+            position: absolute;
+            background: #f5c518;
+            border-radius: 50%;
+            animation: float 20s infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) translateX(0); opacity: 0.3; }
+            50% { transform: translateY(-100px) translateX(50px); opacity: 0.6; }
         }
 
         .header { 
-            background-color: #000000; 
+            background: linear-gradient(135deg, #000000 0%, #1a1a1a 100%);
             padding: 15px 0; 
-            border-bottom: 1px solid #333;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.5);
+            border-bottom: 2px solid #f5c518;
+            box-shadow: 0 4px 20px rgba(245, 197, 24, 0.3);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(10px);
         }
 
-        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+        .container { 
+            max-width: 1200px; 
+            margin: 0 auto; 
+            padding: 0 20px; 
+            position: relative;
+            z-index: 1;
+        }
 
         .logo-container {
             display: flex;
             align-items: center;
             gap: 15px;
+            animation: slideInLeft 0.8s ease-out;
+        }
+
+        @keyframes slideInLeft {
+            from { opacity: 0; transform: translateX(-50px); }
+            to { opacity: 1; transform: translateX(0); }
         }
 
         .logo-img {
             width: 80px;
             height: 80px;
             object-fit: contain;
-            background: #f5c518;
+            background: linear-gradient(135deg, #f5c518 0%, #ffd700 100%);
             padding: 5px;
-            border-radius: 4px;
+            border-radius: 8px;
+            transition: transform 0.3s;
+            box-shadow: 0 4px 15px rgba(245, 197, 24, 0.4);
+        }
+
+        .logo-img:hover {
+            transform: rotate(5deg) scale(1.05);
         }
 
         .site-title {
             font-family: 'Montserrat', sans-serif;
             font-weight: 800;
             font-size: 36px;
-            color: #f5c518;
+            background: linear-gradient(135deg, #f5c518 0%, #ffd700 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
             letter-spacing: -1px;
+            text-shadow: 0 0 30px rgba(245, 197, 24, 0.5);
         }
 
         .title-section { 
@@ -51,17 +104,46 @@
             align-items: flex-start; 
             gap: 40px; 
             margin-top: 40px; 
-            flex-wrap: wrap; 
+            flex-wrap: wrap;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .poster {
             width: 300px; 
             height: 450px;
             background: linear-gradient(135deg, #f5c518 0%, #e6b800 100%);
-            border-radius: 8px; 
-            box-shadow: 0 8px 32px rgba(0,0,0,0.6);
+            border-radius: 12px; 
+            box-shadow: 0 10px 40px rgba(245, 197, 24, 0.4);
             overflow: hidden;
             position: relative;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .poster::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transform: rotate(45deg);
+            animation: shine 3s infinite;
+        }
+
+        @keyframes shine {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+        }
+
+        .poster:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 15px 50px rgba(245, 197, 24, 0.6);
         }
 
         .poster-img {
@@ -78,6 +160,16 @@
             margin-bottom: 5px;
             font-weight: 800;
             letter-spacing: -1px;
+            background: linear-gradient(135deg, #ffffff 0%, #f5c518 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: titleGlow 2s ease-in-out infinite;
+        }
+
+        @keyframes titleGlow {
+            0%, 100% { filter: drop-shadow(0 0 10px rgba(245, 197, 24, 0.3)); }
+            50% { filter: drop-shadow(0 0 20px rgba(245, 197, 24, 0.6)); }
         }
 
         .subtitle { 
@@ -93,8 +185,33 @@
             border-radius: 12px; 
             display: inline-block; 
             margin-bottom: 25px;
-            border: 1px solid #333;
-            box-shadow: 0 4px 20px rgba(245, 197, 24, 0.1);
+            border: 2px solid #f5c518;
+            box-shadow: 0 8px 30px rgba(245, 197, 24, 0.3);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s;
+        }
+
+        .rating-box::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, #f5c518, #ffd700, #f5c518);
+            z-index: -1;
+            filter: blur(10px);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .rating-box:hover::before {
+            opacity: 0.7;
+        }
+
+        .rating-box:hover {
+            transform: scale(1.05);
         }
 
         .rating-score { 
@@ -107,11 +224,20 @@
             font-family: 'Montserrat', sans-serif;
         }
 
+        .rating-score .star {
+            animation: starPulse 2s ease-in-out infinite;
+        }
+
+        @keyframes starPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
         .rating-score span { font-size: 28px; color: #888; }
         .rating-count { color: #aaa; margin-top: 8px; font-size: 15px; }
 
         .cta-button {
-            background-color: #f5c518; 
+            background: linear-gradient(135deg, #f5c518 0%, #ffd700 100%);
             color: #000; 
             padding: 18px 40px;
             border: none; 
@@ -122,40 +248,93 @@
             text-decoration: none; 
             display: inline-block;
             transition: all 0.3s;
-            box-shadow: 0 4px 15px rgba(245, 197, 24, 0.3);
+            box-shadow: 0 6px 20px rgba(245, 197, 24, 0.4);
             font-family: 'Roboto', sans-serif;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .cta-button:hover::before {
+            width: 300px;
+            height: 300px;
         }
 
         .cta-button:hover { 
-            background-color: #ffd700;
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(245, 197, 24, 0.5);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(245, 197, 24, 0.6);
         }
 
-        .section { margin: 50px 0; }
+        .section { 
+            margin: 50px 0;
+            animation: fadeInUp 1s ease-out;
+            animation-fill-mode: both;
+        }
+
+        .section:nth-child(2) { animation-delay: 0.1s; }
+        .section:nth-child(3) { animation-delay: 0.2s; }
+        .section:nth-child(4) { animation-delay: 0.3s; }
 
         .section-title { 
             font-family: 'Montserrat', sans-serif;
             font-size: 32px; 
             margin-bottom: 25px; 
             padding-bottom: 12px; 
-            border-bottom: 2px solid #f5c518;
+            border-bottom: 3px solid #f5c518;
             font-weight: 700;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -3px;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background: #ffd700;
+            transition: width 0.5s;
+        }
+
+        .section:hover .section-title::after {
+            width: 100%;
         }
 
         .info-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 20px;
-            background: #1a1a1a;
+            background: linear-gradient(135deg, #1a1a1a 0%, #252525 100%);
             padding: 30px;
             border-radius: 12px;
             border: 1px solid #333;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
         }
 
         .info-item {
             display: flex;
             gap: 15px;
+            padding: 10px;
+            border-radius: 8px;
+            transition: all 0.3s;
+        }
+
+        .info-item:hover {
+            background: rgba(245, 197, 24, 0.1);
+            transform: translateX(5px);
         }
 
         .info-label {
@@ -165,17 +344,24 @@
         }
 
         .info-value {
-            color: #fff;
+            color: #f5c518;
             font-weight: 600;
         }
 
         .plot-box {
-            background: #1a1a1a;
+            background: linear-gradient(135deg, #1a1a1a 0%, #252525 100%);
             padding: 30px;
             border-radius: 12px;
             border: 1px solid #333;
             line-height: 1.8;
             color: #ddd;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s;
+        }
+
+        .plot-box:hover {
+            border-color: #f5c518;
+            box-shadow: 0 8px 30px rgba(245, 197, 24, 0.2);
         }
 
         .seasons-grid {
@@ -189,12 +375,30 @@
             padding: 25px;
             border-radius: 12px;
             border: 1px solid #333;
-            transition: all 0.3s;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .season-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(245, 197, 24, 0.1), transparent);
+            transition: left 0.5s;
+        }
+
+        .season-card:hover::before {
+            left: 100%;
         }
 
         .season-card:hover {
             border-color: #f5c518;
-            transform: translateY(-5px);
+            transform: translateY(-8px);
+            box-shadow: 0 10px 30px rgba(245, 197, 24, 0.3);
         }
 
         .season-title {
@@ -209,6 +413,7 @@
             color: #aaa;
             font-size: 14px;
             margin-bottom: 15px;
+            font-style: italic;
         }
 
         .season-desc {
@@ -230,12 +435,32 @@
             border-radius: 12px; 
             text-align: center;
             border: 1px solid #333;
-            transition: transform 0.3s;
+            transition: all 0.4s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-card::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: radial-gradient(circle, rgba(245, 197, 24, 0.2), transparent);
+            transform: translate(-50%, -50%);
+            transition: width 0.4s, height 0.4s;
+        }
+
+        .stat-card:hover::after {
+            width: 300px;
+            height: 300px;
         }
 
         .stat-card:hover {
-            transform: translateY(-5px);
+            transform: translateY(-8px) scale(1.03);
             border-color: #f5c518;
+            box-shadow: 0 10px 30px rgba(245, 197, 24, 0.3);
         }
 
         .stat-number { 
@@ -243,20 +468,42 @@
             font-weight: 800; 
             color: #f5c518;
             font-family: 'Montserrat', sans-serif;
+            position: relative;
+            z-index: 1;
         }
 
-        .stat-label { color: #aaa; margin-top: 8px; font-size: 15px; }
+        .stat-label { 
+            color: #aaa; 
+            margin-top: 8px; 
+            font-size: 15px;
+            position: relative;
+            z-index: 1;
+        }
 
         .genre-chart {
-            background: #1a1a1a;
+            background: linear-gradient(135deg, #1a1a1a 0%, #252525 100%);
             padding: 30px;
             border-radius: 12px;
             border: 1px solid #333;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
         }
 
         .genre-bar-item {
             margin-bottom: 20px;
+            animation: slideInRight 0.6s ease-out;
+            animation-fill-mode: both;
         }
+
+        @keyframes slideInRight {
+            from { opacity: 0; transform: translateX(50px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        .genre-bar-item:nth-child(1) { animation-delay: 0.1s; }
+        .genre-bar-item:nth-child(2) { animation-delay: 0.2s; }
+        .genre-bar-item:nth-child(3) { animation-delay: 0.3s; }
+        .genre-bar-item:nth-child(4) { animation-delay: 0.4s; }
+        .genre-bar-item:nth-child(5) { animation-delay: 0.5s; }
 
         .genre-label {
             display: flex;
@@ -281,19 +528,38 @@
             border-radius: 6px;
             overflow: hidden;
             position: relative;
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3);
         }
 
         .genre-bar-fill {
             background: linear-gradient(90deg, #f5c518 0%, #ffd700 100%);
             height: 100%;
             border-radius: 6px;
-            transition: width 1s ease-out;
+            transition: width 1.5s cubic-bezier(0.4, 0, 0.2, 1);
             display: flex;
             align-items: center;
             padding: 0 15px;
             font-size: 13px;
             font-weight: 700;
             color: #000;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .genre-bar-fill::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            animation: shimmer 2s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { left: -100%; }
+            100% { left: 100%; }
         }
 
         .reviews-container {
@@ -311,14 +577,40 @@
             margin-bottom: 25px;
             max-width: 650px;
             position: relative;
-            animation: fadeInUp 0.6s ease-out;
-            transition: all 0.3s;
+            animation: bubbleAppear 0.6s ease-out;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        @keyframes bubbleAppear {
+            from { 
+                opacity: 0; 
+                transform: translateY(30px) scale(0.9); 
+            }
+            to { 
+                opacity: 1; 
+                transform: translateY(0) scale(1); 
+            }
+        }
+
+        .review-bubble::before {
+            content: '';
+            position: absolute;
+            inset: -2px;
+            background: linear-gradient(45deg, transparent, rgba(245, 197, 24, 0.5), transparent);
+            border-radius: 20px;
+            opacity: 0;
+            transition: opacity 0.3s;
+            z-index: -1;
+        }
+
+        .review-bubble:hover::before {
+            opacity: 1;
         }
 
         .review-bubble:hover {
-            transform: translateY(-5px);
+            transform: translateY(-8px) scale(1.02);
             border-color: #f5c518;
-            box-shadow: 0 8px 30px rgba(245, 197, 24, 0.2);
+            box-shadow: 0 12px 40px rgba(245, 197, 24, 0.3);
         }
 
         .review-bubble:nth-child(odd) {
@@ -341,6 +633,17 @@
             background: #0f0f0f;
             border-radius: 10px;
             border-left: 4px solid #f5c518;
+            position: relative;
+        }
+
+        .review-main-text::before {
+            content: '"';
+            position: absolute;
+            top: -10px;
+            left: 10px;
+            font-size: 60px;
+            color: #f5c518;
+            opacity: 0.3;
         }
 
         .review-details {
@@ -353,6 +656,12 @@
             padding: 12px 15px;
             border-radius: 8px;
             border-left: 3px solid var(--box-color, #888);
+            transition: all 0.3s;
+        }
+
+        .review-detail-box:hover {
+            background: #1a1a1a;
+            transform: translateX(5px);
         }
 
         .review-detail-box.pros { --box-color: #4ade80; }
@@ -375,18 +684,12 @@
             line-height: 1.5;
         }
 
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        .loading { 
+            text-align: center; 
+            padding: 40px; 
+            color: #888;
+            font-size: 18px;
         }
-
-        .loading { text-align: center; padding: 40px; color: #888; }
 
         #debug-box {
             background: #1a1a1a; 
@@ -398,6 +701,7 @@
             max-width: 1200px; 
             display: none;
             border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(255, 68, 68, 0.3);
         }
 
         @media (max-width: 768px) {
@@ -414,9 +718,49 @@
                 margin-right: auto;
             }
         }
+
+        /* Scroll to top button */
+        .scroll-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #f5c518 0%, #ffd700 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            opacity: 0;
+            transform: translateY(100px);
+            transition: all 0.3s;
+            z-index: 99;
+            box-shadow: 0 4px 15px rgba(245, 197, 24, 0.4);
+        }
+
+        .scroll-top.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .scroll-top:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(245, 197, 24, 0.6);
+        }
+
+        .scroll-top::before {
+            content: '↑';
+            font-size: 24px;
+            font-weight: bold;
+            color: #000;
+        }
     </style>
 </head>
 <body>
+    <!-- Background particles -->
+    <div class="bg-particles" id="particles"></div>
+
     <div class="header">
         <div class="container">
             <div class="logo-container">
@@ -442,7 +786,7 @@
 
                 <div class="rating-box">
                     <div class="rating-score">
-                        ★ <span id="avgRating">--</span><span>/10</span>
+                        <span class="star">★</span> <span id="avgRating">--</span><span>/10</span>
                     </div>
                     <div class="rating-count" id="ratingCount">Loading ratings...</div>
                 </div>
@@ -496,285 +840,4 @@
                     <div class="season-desc">The workload intensifies. Students juggle clinical postings, university exams, and the growing weight of responsibility as they encounter real patients.</div>
                 </div>
                 <div class="season-card">
-                    <div class="season-title">Season 3: Final Year</div>
-                    <div class="season-subtitle">Identity Crisis</div>
-                    <div class="season-desc">The stakes are higher than ever. With final exams looming and career decisions on the horizon, students question everything they thought they knew.</div>
-                </div>
-                <div class="season-card">
-                    <div class="season-title">Season 4: Internship</div>
-                    <div class="season-subtitle">Reality Hits</div>
-                    <div class="season-desc">The ultimate test. Now responsible for actual patient care, interns discover who they truly are under pressure—and whether medicine is really their calling.</div>
-                </div>
-            </div>
-        </div>
-
-        <div class="section">
-            <h2 class="section-title">Audience Statistics</h2>
-            <div class="stats-grid">
-                <div class="stat-card">
-                    <div class="stat-number" id="totalReviews">--</div>
-                    <div class="stat-label">Total Reviews</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-number" id="avgScore">--</div>
-                    <div class="stat-label">Average Rating</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-number" style="font-size: 24px;" id="topGenresText">Loading...</div>
-                    <div class="stat-label">Top Genres</div>
-                </div>
-            </div>
-        </div>
-
-        <div class="section">
-            <h2 class="section-title">Genre Distribution</h2>
-            <div class="genre-chart" id="genreChart">
-                <div class="loading">Loading genres...</div>
-            </div>
-        </div>
-
-        <div class="section">
-            <h2 class="section-title">Student Reviews</h2>
-            <div class="reviews-container" id="reviewsContainer">
-                <div class="loading">Loading reviews...</div>
-            </div>
-        </div>
-    </div>
-
-    <script>
-        const SHEET_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQhOAM8mXKtaI0T8AvczN3NTZz9KBBZSYZl3E-SLS-Ie8kwCWFi1kpLyyl9NZAUwj379VNI76rv3lSm/pub?gid=1704629096&single=true&output=csv';
-
-        const COLUMNS = {
-            rating: 'Overall Rating',
-            genre: 'Genres of TNMC(for you)',
-            review: 'Write a one line Review of TNMC',
-            pros: 'Pros (what works)',
-            cons: 'Cons (What needs improvement)',
-            best: 'Best thing about TNMC',
-            improve: 'One thing TNMC desperately needs to improve'
-        };
-
-        const debugBox = document.getElementById('debug-box');
-
-                async function fetchData() {
-            try {
-                const response = await fetch(SHEET_URL);
-                if (!response.ok) throw new Error(`HTTP Error: ${response.status}`);
-                const csvText = await response.text();
-                const data = parseCSVRobust(csvText);
-
-                if (data.length > 0) {
-                    // --- START AUTO-DETECT HEADERS ---
-                    // This section looks at the REAL headers from the sheet
-                    // and updates your COLUMNS mapping automatically.
-                    const realHeaders = Object.keys(data[0]);
-                    
-                    // Helper to find a header containing a specific word
-                    const find = (word) => realHeaders.find(h => h.toLowerCase().includes(word.toLowerCase()));
-
-                    // Update the global COLUMNS object with the headers we actually found
-                    if (find('rating')) COLUMNS.rating = find('rating');
-                    if (find('genres')) COLUMNS.genre = find('genres');
-                    if (find('review')) COLUMNS.review = find('review');
-                    if (find('pros'))   COLUMNS.pros = find('pros');
-                    if (find('cons'))   COLUMNS.cons = find('cons');
-                    if (find('best'))   COLUMNS.best = find('best');
-                    if (find('improve')) COLUMNS.improve = find('improve');
-                    
-                    // Debug: Print what we found to your red debug box
-                    showDebug(`✅ Connected! <br>Found Genre Column: "${COLUMNS.genre}"`, false);
-                    setTimeout(() => { debugBox.style.display = 'none'; }, 5000); // Hide after 5s
-                    // --- END AUTO-DETECT HEADERS ---
-                }
-
-                displayData(data);
-            } catch (error) {
-                console.error('Error fetching data:', error);
-                document.getElementById('reviewsContainer').innerHTML = 
-                    `<div class="loading">Unable to load reviews. <br> <small>${error.message}</small></div>`;
-                showDebug(`❌ CRITICAL ERROR: ${error.message}`, true);
-            }
-        }
-
-
-        function showDebug(msg, isError) {
-            debugBox.style.display = 'block';
-            debugBox.style.borderColor = isError ? '#ff4444' : '#44ff44';
-            debugBox.innerHTML = msg;
-        }
-
-        function parseCSVRobust(text) {
-            const rows = [];
-            let currentRow = [];
-            let currentField = '';
-            let insideQuotes = false;
-
-            text = text.replace(/\r\n/g, '\n').replace(/\r/g, '\n');
-
-            for (let i = 0; i < text.length; i++) {
-                const char = text[i];
-                const nextChar = text[i + 1];
-
-                if (char === '"') {
-                    if (insideQuotes && nextChar === '"') {
-                        currentField += '"';
-                        i++;
-                    } else {
-                        insideQuotes = !insideQuotes;
-                    }
-                } else if (char === ',' && !insideQuotes) {
-                    currentRow.push(currentField.trim());
-                    currentField = '';
-                } else if (char === '\n' && !insideQuotes) {
-                    currentRow.push(currentField.trim());
-                    if (currentRow.length > 0) rows.push(currentRow);
-                    currentRow = [];
-                    currentField = '';
-                } else {
-                    currentField += char;
-                }
-            }
-            if (currentField || currentRow.length > 0) {
-                currentRow.push(currentField.trim());
-                rows.push(currentRow);
-            }
-
-            if (rows.length === 0) return [];
-
-            const headers = rows[0].map(h => h.replace(/^"|"$/g, '').trim());
-            return rows.slice(1).map(row => {
-                const obj = {};
-                headers.forEach((header, index) => {
-                    obj[header] = row[index] ? row[index].replace(/^"|"$/g, '').trim() : '';
-                });
-                return obj;
-            });
-        }
-
-        function displayData(data) {
-            const ratings = data
-                .map(row => parseInt(row[COLUMNS.rating]))
-                .filter(r => !isNaN(r) && r > 0);
-
-            const avgRating = ratings.length > 0 
-                ? (ratings.reduce((a, b) => a + b, 0) / ratings.length).toFixed(1) 
-                : 0;
-
-            document.getElementById('avgRating').textContent = avgRating;
-            document.getElementById('ratingCount').textContent = `${ratings.length} ratings`;
-            document.getElementById('totalReviews').textContent = data.length;
-            document.getElementById('avgScore').textContent = avgRating + '/10';
-
-            // Process genres - handle multiple genres per response
-            let allGenres = [];
-            data.forEach(row => {
-                if (row[COLUMNS.genre]) {
-                    // Split by comma and clean each genre
-                    const genresInRow = row[COLUMNS.genre]
-                        .split(',')
-                        .map(g => g.trim())
-                        .filter(g => g && g.length > 0);
-
-                    allGenres.push(...genresInRow);
-                }
-            });
-
-            // Count each genre occurrence
-            const genreCounts = {};
-            allGenres.forEach(g => {
-                genreCounts[g] = (genreCounts[g] || 0) + 1;
-            });
-
-            console.log('All genres found:', allGenres);
-            console.log('Genre counts:', genreCounts);
-            console.log('Sample row genre data:', data[0] ? data[0][COLUMNS.genre] : 'No data');
-
-            const sortedGenres = Object.entries(genreCounts).sort((a, b) => b[1] - a[1]);
-            const topGenres = sortedGenres.slice(0, 8);
-            const top3Genres = sortedGenres.slice(0, 3);
-
-            const topGenresText = document.getElementById('topGenresText');
-            if (top3Genres.length > 0) {
-                topGenresText.innerHTML = top3Genres.map(([genre]) => `⭐ ${genre}`).join('<br>');
-            } else {
-                topGenresText.textContent = 'No data yet';
-            }
-
-            const genreChart = document.getElementById('genreChart');
-            if (topGenres.length > 0) {
-                const maxCount = topGenres[0][1];
-                genreChart.innerHTML = topGenres.map(([genre, count]) => {
-                    const percentage = (count / maxCount) * 100;
-                    return `
-                        <div class="genre-bar-item">
-                            <div class="genre-label">
-                                <span class="genre-name">${genre}</span>
-                                <span class="genre-count">${count} votes</span>
-                            </div>
-                            <div class="genre-bar-bg">
-                                <div class="genre-bar-fill" style="width: ${percentage}%">
-                                    ${Math.round(percentage)}%
-                                </div>
-                            </div>
-                        </div>
-                    `;
-                }).join('');
-            } else {
-                genreChart.innerHTML = '<div class="loading">No genre data yet</div>';
-            }
-
-            // Display reviews with all details
-            const validReviews = data.filter(row => row[COLUMNS.review] && row[COLUMNS.review].trim().length > 0);
-            const reviewsContainer = document.getElementById('reviewsContainer');
-
-            if (validReviews.length === 0) {
-                reviewsContainer.innerHTML = '<div class="loading">No reviews found yet. Be the first!</div>';
-                return;
-            }
-
-            reviewsContainer.innerHTML = validReviews.reverse().slice(0, 30).map(row => {
-                const reviewText = row[COLUMNS.review];
-                const pros = row[COLUMNS.pros];
-                const cons = row[COLUMNS.cons];
-                const best = row[COLUMNS.best];
-                const improve = row[COLUMNS.improve];
-
-                return `
-                    <div class="review-bubble">
-                        <div class="review-main-text">"${reviewText}"</div>
-                        <div class="review-details">
-                            ${pros ? `
-                                <div class="review-detail-box pros">
-                                    <div class="detail-label">✓ Pros</div>
-                                    <div class="detail-text">${pros}</div>
-                                </div>
-                            ` : ''}
-                            ${cons ? `
-                                <div class="review-detail-box cons">
-                                    <div class="detail-label">✗ Cons</div>
-                                    <div class="detail-text">${cons}</div>
-                                </div>
-                            ` : ''}
-                            ${best ? `
-                                <div class="review-detail-box best">
-                                    <div class="detail-label">⭐ Best Thing</div>
-                                    <div class="detail-text">${best}</div>
-                                </div>
-                            ` : ''}
-                            ${improve ? `
-                                <div class="review-detail-box improve">
-                                    <div class="detail-label">⚠ Needs Improvement</div>
-                                    <div class="detail-text">${improve}</div>
-                                </div>
-                            ` : ''}
-                        </div>
-                    </div>
-                `;
-            }).join('');
-        }
-
-        fetchData();
-        setInterval(fetchData, 300000);
-    </script>
-</body>
-</html>
+                    <div class="season-title">Season 3: Final Year
