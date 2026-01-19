@@ -4,604 +4,124 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TNMC - IMDb Style Rating Page</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Roboto', Arial, sans-serif;
-            background-color: #121212;
-            color: #ffffff;
-            line-height: 1.6;
-        }
-
-        .header {
-            background-color: #000000;
-            padding: 15px 0;
-            border-bottom: 1px solid #333;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.5);
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        .logo-container {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-
-        .logo-img {
-            width: 80px;
-            height: 80px;
-            object-fit: contain;
-            background: #f5c518;
-            padding: 5px;
-            border-radius: 4px;
-        }
-
-        .site-title {
-            font-family: 'Montserrat', sans-serif;
-            font-weight: 800;
-            font-size: 36px;
-            color: #f5c518;
-            letter-spacing: -1px;
-        }
-
-        .site-subtitle {
-            color: #888;
-            font-size: 14px;
-        }
-
-        .title-section {
-            display: flex;
-            align-items: flex-start;
-            gap: 40px;
-            margin-top: 40px;
-            flex-wrap: wrap;
-        }
-
-        .poster {
-            width: 300px;
-            height: 450px;
-            background: linear-gradient(135deg, #f5c518 0%, #e6b800 100%);
-            border-radius: 8px;
-            box-shadow: 0 8px 32px rgba(0,0,0,0.6);
-            overflow: hidden;
-            flex-shrink: 0;
-        }
-
-        .poster-img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .title-info {
-            flex: 1;
-            min-width: 300px;
-        }
-
-        h1 {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 52px;
-            margin-bottom: 5px;
-            font-weight: 800;
-            letter-spacing: -1px;
-        }
-
-        .subtitle {
-            color: #aaa;
-            font-size: 20px;
-            margin-bottom: 25px;
-            font-weight: 300;
-        }
-
-        .rating-box {
-            background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
-            padding: 25px;
-            border-radius: 12px;
-            display: inline-block;
-            margin-bottom: 25px;
-            border: 1px solid #333;
-            box-shadow: 0 4px 20px rgba(245, 197, 24, 0.1);
-        }
-
-        .rating-score {
-            font-size: 64px;
-            font-weight: bold;
-            color: #f5c518;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-family: 'Montserrat', sans-serif;
-        }
-
-        .rating-score span {
-            font-size: 28px;
-            color: #888;
-        }
-
-        .rating-count {
-            color: #aaa;
-            margin-top: 8px;
-            font-size: 15px;
-        }
-
-        .cta-button {
-            background-color: #f5c518;
-            color: #000;
-            padding: 18px 40px;
-            border: none;
-            border-radius: 8px;
-            font-size: 18px;
-            font-weight: 700;
-            cursor: pointer;
-            text-decoration: none;
-            display: inline-block;
-            transition: all 0.3s;
-            box-shadow: 0 4px 15px rgba(245, 197, 24, 0.3);
-            font-family: 'Roboto', sans-serif;
-        }
-
-        .cta-button:hover {
-            background-color: #ffd700;
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(245, 197, 24, 0.5);
-        }
-
-        .section {
-            margin: 50px 0;
-        }
-
-        .section-title {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 32px;
-            margin-bottom: 25px;
-            padding-bottom: 12px;
-            border-bottom: 2px solid #f5c518;
-            font-weight: 700;
-        }
-
-        .info-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 20px;
-            background: #1a1a1a;
-            padding: 30px;
-            border-radius: 12px;
-            border: 1px solid #333;
-        }
-
-        .info-item {
-            display: flex;
-            gap: 15px;
-        }
-
-        .info-label {
-            color: #888;
-            min-width: 100px;
-            font-weight: 500;
-        }
-
-        .info-value {
-            color: #fff;
-            font-weight: 600;
-        }
-
-        .plot-box {
-            background: #1a1a1a;
-            padding: 30px;
-            border-radius: 12px;
-            border: 1px solid #333;
-            line-height: 1.8;
-            color: #ddd;
-        }
-
-        .seasons-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-        }
-
-        .season-card {
-            background: linear-gradient(135deg, #1a1a1a 0%, #252525 100%);
-            padding: 25px;
-            border-radius: 12px;
-            border: 1px solid #333;
-            transition: all 0.3s;
-        }
-
-        .season-card:hover {
-            border-color: #f5c518;
-            transform: translateY(-5px);
-        }
-
-        .season-title {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 20px;
-            font-weight: 700;
-            color: #f5c518;
-            margin-bottom: 10px;
-        }
-
-        .season-subtitle {
-            color: #aaa;
-            font-size: 14px;
-            margin-bottom: 15px;
-        }
-
-        .season-desc {
-            color: #ccc;
-            line-height: 1.6;
-            font-size: 14px;
-        }
-
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 25px;
-            margin-top: 25px;
-        }
-
-        .stat-card {
-            background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
-            padding: 30px;
-            border-radius: 12px;
-            text-align: center;
-            border: 1px solid #333;
-            transition: transform 0.3s;
-        }
-
-        .stat-card:hover {
-            transform: translateY(-5px);
-            border-color: #f5c518;
-        }
-
-        .stat-number {
-            font-size: 48px;
-            font-weight: 800;
-            color: #f5c518;
-            font-family: 'Montserrat', sans-serif;
-        }
-
-        .stat-label {
-            color: #aaa;
-            margin-top: 8px;
-            font-size: 15px;
-        }
-
-        .genre-chart {
-            background: #1a1a1a;
-            padding: 30px;
-            border-radius: 12px;
-            border: 1px solid #333;
-        }
-
-        .genre-bar-item {
-            margin-bottom: 20px;
-        }
-
-        .genre-label {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 8px;
-            font-size: 15px;
-        }
-
-        .genre-name {
-            font-weight: 500;
-            color: #fff;
-        }
-
-        .genre-count {
-            color: #f5c518;
-            font-weight: 700;
-        }
-
-        .genre-bar-bg {
-            background: #2a2a2a;
-            height: 32px;
-            border-radius: 6px;
-            overflow: hidden;
-            position: relative;
-        }
-
-        .genre-bar-fill {
-            background: linear-gradient(90deg, #f5c518 0%, #ffd700 100%);
-            height: 100%;
-            border-radius: 6px;
-            transition: width 1s ease-out;
-            display: flex;
-            align-items: center;
-            padding: 0 15px;
-            font-size: 13px;
-            font-weight: 700;
-            color: #000;
-        }
-
-        .reviews-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 25px;
-            flex-wrap: wrap;
-            gap: 15px;
-        }
-
-        .reviews-controls {
-            display: flex;
-            gap: 15px;
-            align-items: center;
-        }
-
-        .filter-select {
-            background: #1a1a1a;
-            color: #fff;
-            border: 1px solid #333;
-            padding: 10px 20px;
-            border-radius: 8px;
-            font-size: 14px;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-
-        .filter-select:hover {
-            border-color: #f5c518;
-        }
-
-        .reviews-counter {
-            color: #888;
-            font-size: 14px;
-            padding: 10px 20px;
-            background: #1a1a1a;
-            border-radius: 8px;
-            border: 1px solid #333;
-        }
-
-        .reviews-container {
-            position: relative;
-            min-height: 400px;
-        }
-
-        .review-card {
-            background: linear-gradient(135deg, #1a1a1a 0%, #252525 100%);
-            padding: 25px;
-            border-radius: 12px;
-            border: 1px solid #333;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
-            margin-bottom: 20px;
-            transition: all 0.3s;
-        }
-
-        .review-card:hover {
-            transform: translateY(-3px);
-            border-color: #f5c518;
-            box-shadow: 0 8px 30px rgba(245, 197, 24, 0.2);
-        }
-
-        .review-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 15px;
-            padding-bottom: 15px;
-            border-bottom: 1px solid #333;
-        }
-
-        .review-meta {
-            display: flex;
-            gap: 20px;
-            align-items: center;
-        }
-
-        .review-rating {
-            background: #f5c518;
-            color: #000;
-            padding: 8px 16px;
-            border-radius: 6px;
-            font-weight: 700;
-            font-size: 18px;
-            font-family: 'Montserrat', sans-serif;
-        }
-
-        .review-role {
-            color: #888;
-            font-size: 13px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .review-batch {
-            color: #f5c518;
-            font-weight: 600;
-            font-size: 14px;
-        }
-
-        .review-main-text {
-            color: #fff;
-            font-size: 17px;
-            line-height: 1.7;
-            margin-bottom: 20px;
-            font-style: italic;
-            padding: 15px;
-            background: #0f0f0f;
-            border-radius: 10px;
-            border-left: 4px solid #f5c518;
-        }
-
-        .review-details {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 12px;
-        }
-
-        .review-detail-box {
-            background: #0f0f0f;
-            padding: 12px 15px;
-            border-radius: 8px;
-            border-left: 3px solid var(--box-color, #888);
-        }
-
-        .review-detail-box.pros {
-            --box-color: #4ade80;
-        }
-
-        .review-detail-box.cons {
-            --box-color: #f87171;
-        }
-
-        .review-detail-box.best {
-            --box-color: #60a5fa;
-        }
-
-        .review-detail-box.improve {
-            --box-color: #fbbf24;
-        }
-
-        .review-detail-box.infrastructure {
-            --box-color: #a78bfa;
-        }
-
-        .review-detail-box.academics {
-            --box-color: #2dd4bf;
-        }
-
-        .review-detail-box.fests {
-            --box-color: #fb923c;
-        }
-
-        .detail-label {
-            font-size: 11px;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            margin-bottom: 6px;
-            color: var(--box-color, #888);
-        }
-
-        .detail-text {
-            color: #ddd;
-            font-size: 14px;
-            line-height: 1.5;
-        }
-
-        .load-more-btn {
-            display: block;
-            margin: 30px auto;
-            background: #1a1a1a;
-            color: #f5c518;
-            border: 2px solid #f5c518;
-            padding: 15px 40px;
-            border-radius: 8px;
-            font-size: 16px;
-            font-weight: 700;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-
-        .load-more-btn:hover {
-            background: #f5c518;
-            color: #000;
-            transform: translateY(-2px);
-        }
-
-        .load-more-btn:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
-        }
-
-        .loading {
-            text-align: center;
-            padding: 40px;
-            color: #888;
-        }
-
-        .error-message {
-            background: #2a1a1a;
-            border: 1px solid #ff4444;
-            color: #ff8888;
-            padding: 20px;
-            border-radius: 8px;
-            margin: 20px 0;
-        }
-
-        .no-reviews {
-            text-align: center;
-            padding: 60px 20px;
-            color: #666;
-            font-size: 18px;
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
+        /* --- RESET & BASIC STYLES --- */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Roboto', Arial, sans-serif; background-color: #121212; color: #ffffff; line-height: 1.6; }
+        
+        /* --- HEADER --- */
+        .header { background-color: #000000; padding: 15px 0; border-bottom: 1px solid #333; position: sticky; top: 0; z-index: 100; box-shadow: 0 4px 12px rgba(0,0,0,0.5); }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+        .logo-container { display: flex; align-items: center; gap: 15px; }
+        .logo-img { width: 50px; height: 50px; object-fit: contain; background: #f5c518; padding: 2px; border-radius: 4px; }
+        .site-title { font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 24px; color: #f5c518; letter-spacing: -1px; }
+        .site-subtitle { color: #888; font-size: 12px; margin-top: -2px; }
+
+        /* --- TITLE SECTION --- */
+        .title-section { display: flex; gap: 40px; margin-top: 40px; margin-bottom: 60px; flex-wrap: wrap; }
+        .poster { width: 300px; height: 450px; background: linear-gradient(135deg, #f5c518 0%, #e6b800 100%); border-radius: 8px; box-shadow: 0 8px 32px rgba(0,0,0,0.6); overflow: hidden; flex-shrink: 0; }
+        .poster-img { width: 100%; height: 100%; object-fit: cover; }
+        .title-info { flex: 1; min-width: 300px; }
+        h1 { font-family: 'Montserrat', sans-serif; font-size: 48px; margin-bottom: 5px; font-weight: 800; letter-spacing: -1px; line-height: 1.1; }
+        .subtitle { color: #aaa; font-size: 18px; margin-bottom: 25px; font-weight: 300; }
+        
+        /* --- RATING BOX --- */
+        .rating-box { background: rgba(255,255,255,0.05); padding: 20px 30px; border-radius: 12px; display: inline-flex; flex-direction: column; border: 1px solid #333; margin-bottom: 30px; }
+        .rating-score { font-size: 56px; font-weight: 800; color: #f5c518; display: flex; align-items: center; gap: 10px; font-family: 'Montserrat', sans-serif; line-height: 1; }
+        .rating-score span { font-size: 24px; color: #666; font-weight: 600; margin-top: 15px; }
+        .rating-count { color: #888; margin-top: 5px; font-size: 14px; text-transform: uppercase; letter-spacing: 1px; }
+
+        /* --- BUTTON --- */
+        .cta-button { background-color: #f5c518; color: #000; padding: 15px 30px; border: none; border-radius: 6px; font-size: 16px; font-weight: 700; cursor: pointer; text-decoration: none; display: inline-block; transition: all 0.2s; box-shadow: 0 4px 15px rgba(245, 197, 24, 0.2); text-transform: uppercase; letter-spacing: 0.5px; }
+        .cta-button:hover { background-color: #e3b616; transform: translateY(-2px); }
+
+        /* --- COMMON SECTIONS --- */
+        .section { margin: 60px 0; }
+        .section-title { font-family: 'Montserrat', sans-serif; font-size: 28px; margin-bottom: 25px; padding-left: 15px; border-left: 5px solid #f5c518; font-weight: 700; color: #fff; }
+
+        /* --- INFO GRID --- */
+        .info-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; background: #1a1a1a; padding: 25px; border-radius: 8px; border: 1px solid #333; }
+        .info-item { display: flex; flex-direction: column; gap: 5px; }
+        .info-label { color: #888; font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px; }
+        .info-value { color: #fff; font-weight: 600; font-size: 16px; }
+
+        /* --- STATS --- */
+        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; }
+        .stat-card { background: #1a1a1a; padding: 25px; border-radius: 8px; text-align: center; border: 1px solid #333; }
+        .stat-number { font-size: 36px; font-weight: 800; color: #f5c518; font-family: 'Montserrat', sans-serif; }
+        .stat-label { color: #aaa; margin-top: 5px; font-size: 13px; text-transform: uppercase; }
+
+        /* --- GENRE CHART --- */
+        .genre-chart { background: #1a1a1a; padding: 30px; border-radius: 8px; border: 1px solid #333; }
+        .genre-bar-item { margin-bottom: 15px; }
+        .genre-label { display: flex; justify-content: space-between; margin-bottom: 5px; font-size: 14px; }
+        .genre-bar-bg { background: #333; height: 12px; border-radius: 6px; overflow: hidden; }
+        .genre-bar-fill { background: #f5c518; height: 100%; border-radius: 6px; width: 0; transition: width 1s ease-out; }
+
+        /* --- REVIEWS --- */
+        .reviews-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; flex-wrap: wrap; gap: 15px; }
+        .reviews-controls { display: flex; gap: 10px; }
+        .filter-select { background: #1a1a1a; color: #fff; border: 1px solid #444; padding: 8px 15px; border-radius: 4px; font-size: 14px; cursor: pointer; }
+        
+        .review-card { background: #1a1a1a; border-radius: 12px; padding: 25px; margin-bottom: 25px; border: 1px solid #333; transition: transform 0.2s; }
+        .review-card:hover { border-color: #555; }
+        
+        .review-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 15px; border-bottom: 1px solid #333; padding-bottom: 15px; }
+        .review-user-info { display: flex; gap: 10px; align-items: center; }
+        .user-avatar { width: 40px; height: 40px; background: #333; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; color: #888; }
+        .user-details div { line-height: 1.2; }
+        .user-role { font-weight: 700; color: #fff; font-size: 15px; }
+        .user-batch { color: #f5c518; font-size: 13px; }
+        .user-rating-badge { background: #f5c518; color: #000; padding: 5px 10px; border-radius: 4px; font-weight: 800; display: flex; align-items: center; gap: 4px; }
+
+        .one-line-review { font-size: 18px; font-weight: 600; color: #fff; margin-bottom: 20px; font-style: italic; font-family: 'Montserrat', sans-serif; }
+        
+        /* Grid for Pros/Cons/Best/Improve */
+        .review-text-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 15px; margin-bottom: 25px; }
+        .text-box { background: #111; padding: 15px; border-radius: 8px; border-left: 3px solid #555; }
+        .text-box.pros { border-color: #4ade80; }
+        .text-box.cons { border-color: #f87171; }
+        .text-box.best { border-color: #60a5fa; }
+        .text-box.improve { border-color: #fbbf24; }
+        .box-label { font-size: 11px; font-weight: 700; text-transform: uppercase; margin-bottom: 8px; color: #888; }
+        .text-box.pros .box-label { color: #4ade80; }
+        .text-box.cons .box-label { color: #f87171; }
+        .text-box.best .box-label { color: #60a5fa; }
+        .text-box.improve .box-label { color: #fbbf24; }
+        .box-content { font-size: 14px; color: #ddd; }
+
+        /* New Detailed Ratings Section */
+        .detailed-ratings { background: #111; padding: 20px; border-radius: 8px; margin-top: 20px; }
+        .ratings-title { font-size: 13px; color: #888; text-transform: uppercase; margin-bottom: 15px; font-weight: 700; letter-spacing: 1px; }
+        .ratings-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 15px 30px; }
+        .mini-rating-item { display: flex; flex-direction: column; gap: 5px; }
+        .mini-rating-header { display: flex; justify-content: space-between; font-size: 12px; color: #ccc; }
+        .mini-bar-bg { height: 6px; background: #333; border-radius: 3px; overflow: hidden; }
+        .mini-bar-fill { height: 100%; background: #f5c518; border-radius: 3px; }
+
+        .load-more-btn { display: block; margin: 30px auto; background: transparent; color: #f5c518; border: 2px solid #f5c518; padding: 12px 30px; border-radius: 6px; font-weight: 700; cursor: pointer; transition: all 0.3s; }
+        .load-more-btn:hover { background: #f5c518; color: #000; }
+
+        /* Mobile Adjustments */
         @media (max-width: 768px) {
-            .title-section {
-                flex-direction: column;
-                align-items: center;
-                text-align: center;
-            }
-
-            .poster {
-                width: 250px;
-                height: 375px;
-            }
-
-            h1 {
-                font-size: 36px;
-            }
-
-            .rating-score {
-                font-size: 48px;
-            }
-
-            .site-title {
-                font-size: 28px;
-            }
-
-            .section-title {
-                font-size: 26px;
-            }
-
-            .reviews-header {
-                flex-direction: column;
-                align-items: stretch;
-            }
-
-            .reviews-controls {
-                flex-direction: column;
-            }
-
-            .filter-select {
-                width: 100%;
-            }
+            .title-section { flex-direction: column; align-items: center; text-align: center; }
+            .poster { width: 200px; height: 300px; margin: 0 auto; }
+            h1 { font-size: 32px; }
+            .rating-score { justify-content: center; }
+            .rating-box { align-items: center; width: 100%; }
         }
     </style>
 </head>
 <body>
+
     <div class="header">
         <div class="container">
             <div class="logo-container">
-                <img src="logo.jpg" alt="TNMC Logo" class="logo-img" onerror="this.style.display='none'">
+                <div class="logo-img">TNMC</div>
                 <div>
                     <div class="site-title">TNMC IMDb</div>
-                    <p class="site-subtitle">Topiwala National Medical College</p>
+                    <p class="site-subtitle">The Medical College Database</p>
                 </div>
             </div>
         </div>
@@ -610,77 +130,22 @@
     <div class="container">
         <div class="title-section">
             <div class="poster">
-                <img src="poster.jpg" alt="TNMC Poster" class="poster-img" onerror="this.style.display='none'">
+                <img src="poster.jpg" alt="TNMC Poster" class="poster-img" onerror="this.src='https://via.placeholder.com/300x450/f5c518/000000?text=TNMC'">
             </div>
             <div class="title-info">
                 <h1>TNMC Experience</h1>
-                <p class="subtitle">The Ultimate Medical College Journey</p>
+                <p class="subtitle">The Ultimate Medical College Journey (1921 - Present)</p>
 
                 <div class="rating-box">
                     <div class="rating-score">
                         ★ <span id="avgRating">--</span><span>/10</span>
                     </div>
-                    <div class="rating-count" id="ratingCount">Loading ratings...</div>
+                    <div class="rating-count" id="ratingCount">Calculating...</div>
                 </div>
 
                 <a href="https://docs.google.com/forms/d/e/1FAIpQLSfJiaOX0b9ZlK715zmRoKanPiVwKKRUcXMesXw6PEtuW0QNcw/viewform" target="_blank" class="cta-button">
-                    ★ Rate Your TNMC Experience
+                    Rate Your Experience
                 </a>
-            </div>
-        </div>
-
-        <div class="section">
-            <h2 class="section-title">Release Info</h2>
-            <div class="info-grid">
-                <div class="info-item">
-                    <span class="info-label">Release Year:</span>
-                    <span class="info-value">1921</span>
-                </div>
-                <div class="info-item">
-                    <span class="info-label">Seasons:</span>
-                    <span class="info-value">4</span>
-                </div>
-                <div class="info-item">
-                    <span class="info-label">Episodes:</span>
-                    <span class="info-value">∞ (Ongoing)</span>
-                </div>
-                <div class="info-item">
-                    <span class="info-label">Runtime:</span>
-                    <span class="info-value">5.5 years per viewer</span>
-                </div>
-            </div>
-        </div>
-
-        <div class="section">
-            <h2 class="section-title">Plot Summary</h2>
-            <div class="plot-box">
-                Set in the heart of Mumbai, <strong>Topiwala National Medical College</strong> follows a rotating cast of idealistic students as they navigate academic pressure, hierarchy, sleep deprivation, ethical dilemmas, and moments of quiet triumph. What begins as a dream slowly evolves into a test of resilience, character, and purpose.
-            </div>
-        </div>
-
-        <div class="section">
-            <h2 class="section-title">Seasons & Arcs</h2>
-            <div class="seasons-grid">
-                <div class="season-card">
-                    <div class="season-title">Season 1: First Year</div>
-                    <div class="season-subtitle">Discovery & Shock</div>
-                    <div class="season-desc">The journey begins. Wide-eyed newcomers face their first cadavers, endless lectures, and the realization that medical school is nothing like they imagined.</div>
-                </div>
-                <div class="season-card">
-                    <div class="season-title">Season 2: Second Year</div>
-                    <div class="season-subtitle">Pressure Builds</div>
-                    <div class="season-desc">The workload intensifies. Students juggle clinical postings, university exams, and the growing weight of responsibility as they encounter real patients.</div>
-                </div>
-                <div class="season-card">
-                    <div class="season-title">Season 3: Final Year</div>
-                    <div class="season-subtitle">Identity Crisis</div>
-                    <div class="season-desc">The stakes are higher than ever. With final exams looming and career decisions on the horizon, students question everything they thought they knew.</div>
-                </div>
-                <div class="season-card">
-                    <div class="season-title">Season 4: Internship</div>
-                    <div class="season-subtitle">Reality Hits</div>
-                    <div class="season-desc">The ultimate test. Now responsible for actual patient care, interns discover who they truly are under pressure—and whether medicine is really their calling.</div>
-                </div>
             </div>
         </div>
 
@@ -696,8 +161,8 @@
                     <div class="stat-label">Average Rating</div>
                 </div>
                 <div class="stat-card">
-                    <div class="stat-number" style="font-size: 24px;" id="topGenresText">Loading...</div>
-                    <div class="stat-label">Top Genres</div>
+                    <div class="stat-number" id="topGenre">--</div>
+                    <div class="stat-label">Top Genre</div>
                 </div>
             </div>
         </div>
@@ -705,196 +170,292 @@
         <div class="section">
             <h2 class="section-title">Genre Distribution</h2>
             <div class="genre-chart" id="genreChart">
-                <div class="loading">Loading genres...</div>
+                Loading data...
             </div>
         </div>
 
         <div class="section">
             <div class="reviews-header">
-                <h2 class="section-title" style="margin: 0; border: none; padding: 0;">Student Reviews</h2>
+                <h2 class="section-title" style="border:none; padding:0; margin:0;">Student Reviews</h2>
                 <div class="reviews-controls">
-                    <select id="batchFilter" class="filter-select">
-                        <option value="all">All Batches</option>
-                    </select>
-                    <select id="roleFilter" class="filter-select">
-                        <option value="all">All Roles</option>
-                    </select>
-                    <select id="sortFilter" class="filter-select">
-                        <option value="recent">Most Recent</option>
-                        <option value="highest">Highest Rated</option>
-                        <option value="lowest">Lowest Rated</option>
-                    </select>
-                    <div class="reviews-counter" id="reviewsCounter">0 reviews</div>
+                    <select id="batchFilter" class="filter-select"><option value="all">All Batches</option></select>
+                    <select id="roleFilter" class="filter-select"><option value="all">All Roles</option></select>
                 </div>
             </div>
-            <div class="reviews-container" id="reviewsContainer">
-                <div class="loading">Loading reviews...</div>
-            </div>
-            <button id="loadMoreBtn" class="load-more-btn" style="display: none;">Load More Reviews</button>
+            
+            <div id="reviewsContainer">
+                </div>
+            
+            <button id="loadMoreBtn" class="load-more-btn" style="display:none;">Load More Reviews</button>
         </div>
     </div>
 
     <script>
         const CONFIG = {
+            // Updated Google Sheet CSV URL
             sheetUrl: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQhOAM8mXKtaI0T8AvczN3NTZz9KBBZSYZl3E-SLS-Ie8kwCWFi1kpLyyl9NZAUwj379VNI76rv3lSm/pub?gid=1704629096&single=true&output=csv',
-            refreshInterval: 300000,
-            initialReviewsToShow: 10,
             reviewsPerLoad: 10
         };
 
-        class DataManager {
-            async fetchData() {
-                try {
-                    console.log('Fetching data from:', CONFIG.sheetUrl);
-                    const response = await fetch(CONFIG.sheetUrl);
-                    if (!response.ok) {
-                        throw new Error(`HTTP Error: ${response.status}`);
-                    }
-                    const csvText = await response.text();
-                    console.log('CSV length:', csvText.length);
-                    const data = this.parseCSV(csvText);
-                    console.log('Parsed data rows:', data.length);
-                    return data;
-                } catch (error) {
-                    console.error('Error fetching data:', error);
-                    throw error;
-                }
-            }
+        // State Management
+        let allReviews = [];
+        let filteredReviews = [];
+        let displayedCount = 0;
 
-            parseCSV(text) {
-                const rows = [];
-                let currentRow = [];
-                let currentField = '';
-                let insideQuotes = false;
-
-                text = text.replace(/\r\n/g, '\n').replace(/\r/g, '\n');
-
-                for (let i = 0; i < text.length; i++) {
-                    const char = text[i];
-                    const nextChar = text[i + 1];
-
-                    if (char === '"') {
-                        if (insideQuotes && nextChar === '"') {
-                            currentField += '"';
-                            i++;
-                        } else {
-                            insideQuotes = !insideQuotes;
-                        }
-                    } else if (char === ',' && !insideQuotes) {
-                        currentRow.push(currentField.trim());
-                        currentField = '';
-                    } else if (char === '\n' && !insideQuotes) {
-                        currentRow.push(currentField.trim());
-                        if (currentRow.some(cell => cell.length > 0)) {
-                            rows.push(currentRow);
-                        }
-                        currentRow = [];
-                        currentField = '';
-                    } else {
-                        currentField += char;
-                    }
-                }
-
-                if (currentField || currentRow.length > 0) {
-                    currentRow.push(currentField.trim());
-                    if (currentRow.some(cell => cell.length > 0)) {
-                        rows.push(currentRow);
-                    }
-                }
-
-                if (rows.length === 0) return [];
-
-                const headers = rows[0].map(h => h.replace(/^"|"$/g, '').trim());
-                console.log('CSV Headers:', headers);
+        // --- 1. DATA FETCHING & PARSING ---
+        async function init() {
+            try {
+                const response = await fetch(CONFIG.sheetUrl);
+                const text = await response.text();
+                const data = parseCSV(text);
                 
-                const data = rows.slice(1).map((row, index) => {
-                    const obj = {};
-                    headers.forEach((header, idx) => {
-                        obj[header] = row[idx] ? row[idx].replace(/^"|"$/g, '').trim() : '';
-                    });
-                    return obj;
-                }).filter(row => Object.values(row).some(val => val.length > 0));
-
-                console.log('Sample row:', data[0]);
-                return data;
+                if (data.length > 0) {
+                    allReviews = data;
+                    filteredReviews = data.reverse(); // Show newest first
+                    updateStats(allReviews);
+                    updateGenreChart(allReviews);
+                    populateFilters(allReviews);
+                    renderReviews();
+                } else {
+                    document.getElementById('reviewsContainer').innerHTML = '<div style="text-align:center; padding:20px;">No reviews found yet. Be the first!</div>';
+                }
+            } catch (err) {
+                console.error("Error loading data:", err);
+                document.getElementById('reviewsContainer').innerHTML = '<div style="color:red; text-align:center;">Failed to load data. Please try again later.</div>';
             }
         }
 
-        class UIManager {
-            constructor() {
-                this.elements = {
-                    avgRating: document.getElementById('avgRating'),
-                    ratingCount: document.getElementById('ratingCount'),
-                    totalReviews: document.getElementById('totalReviews'),
-                    avgScore: document.getElementById('avgScore'),
-                    topGenresText: document.getElementById('topGenresText'),
-                    genreChart: document.getElementById('genreChart'),
-                    reviewsContainer: document.getElementById('reviewsContainer'),
-                    batchFilter: document.getElementById('batchFilter'),
-                    roleFilter: document.getElementById('roleFilter'),
-                    sortFilter: document.getElementById('sortFilter'),
-                    reviewsCounter: document.getElementById('reviewsCounter'),
-                    loadMoreBtn: document.getElementById('loadMoreBtn')
-                };
-                
-                this.allReviews = [];
-                this.filteredReviews = [];
-                this.displayedReviewsCount = 0;
-            }
+        function parseCSV(text) {
+            // Robust CSV parser handling quoted fields containing commas
+            const rows = [];
+            let currentRow = [];
+            let currentField = '';
+            let insideQuotes = false;
 
-            updateRatings(data) {
-                const ratings = data
-                    .map(row => parseInt(row['Overall Rating']))
-                    .filter(r => !isNaN(r) && r > 0);
+            for (let i = 0; i < text.length; i++) {
+                const char = text[i];
+                const nextChar = text[i + 1];
 
-                const avgRating = ratings.length > 0
-                    ? (ratings.reduce((a, b) => a + b, 0) / ratings.length).toFixed(1)
-                    : 0;
-
-                this.elements.avgRating.textContent = avgRating;
-                this.elements.ratingCount.textContent = `${ratings.length} ratings`;
-                this.elements.totalReviews.textContent = data.length;
-                this.elements.avgScore.textContent = avgRating + '/10';
-
-                return avgRating;
-            }
-
-            updateGenres(data) {
-                const allGenres = [];
-                data.forEach(row => {
-                    const genreField = row['Genres of TNMC'];
-                    if (genreField) {
-                        const genresInRow = genreField
-                            .split(',')
-                            .map(g => g.trim())
-                            .filter(g => g && g.length > 0);
-                        allGenres.push(...genresInRow);
+                if (char === '"') {
+                    if (insideQuotes && nextChar === '"') {
+                        currentField += '"'; // Handle escaped quotes
+                        i++;
+                    } else {
+                        insideQuotes = !insideQuotes;
                     }
-                });
-
-                const genreCounts = {};
-                allGenres.forEach(g => {
-                    genreCounts[g] = (genreCounts[g] || 0) + 1;
-                });
-
-                const sortedGenres = Object.entries(genreCounts).sort((a, b) => b[1] - a[1]);
-                const topGenres = sortedGenres.slice(0, 8);
-                const top3Genres = sortedGenres.slice(0, 3);
-
-                if (top3Genres.length > 0) {
-                    this.elements.topGenresText.innerHTML = top3Genres
-                        .map(([genre]) => `⭐ ${genre}`)
-                        .join('<br>');
+                } else if (char === ',' && !insideQuotes) {
+                    currentRow.push(currentField.trim());
+                    currentField = '';
+                } else if ((char === '\r' || char === '\n') && !insideQuotes) {
+                    if (char === '\r' && nextChar === '\n') i++;
+                    currentRow.push(currentField.trim());
+                    if (currentRow.some(c => c)) rows.push(currentRow);
+                    currentRow = [];
+                    currentField = '';
                 } else {
-                    this.elements.topGenresText.textContent = 'No data yet';
+                    currentField += char;
                 }
+            }
+            if (currentField) currentRow.push(currentField.trim());
+            if (currentRow.some(c => c)) rows.push(currentRow);
 
-                if (topGenres.length > 0) {
-                    const maxCount = topGenres[0][1];
-                    this.elements.genreChart.innerHTML = topGenres.map(([genre, count]) => {
-                        const percentage = (count / maxCount) * 100;
-                        return `
-                            <div class="genre-bar-item">
-                                <div class="genre-label">
-                                    <span class="genre-name">${genre}</span>
-                                    <span class="genre-count"
+            // Map headers to object keys
+            const headers = rows[0];
+            return rows.slice(1).map(row => {
+                const obj = {};
+                headers.forEach((h, index) => {
+                    // Clean header names to be safe keys if needed, or keep raw
+                    obj[h.trim()] = row[index] || ''; 
+                });
+                return obj;
+            });
+        }
+
+        // --- 2. STATS & CHARTS ---
+        function updateStats(data) {
+            const ratings = data.map(r => parseFloat(r['Overall Rating'])).filter(n => !isNaN(n));
+            const avg = ratings.length ? (ratings.reduce((a, b) => a + b, 0) / ratings.length).toFixed(1) : '0.0';
+            
+            document.getElementById('avgRating').innerText = avg;
+            document.getElementById('avgScore').innerText = avg + '/10';
+            document.getElementById('ratingCount').innerText = `${ratings.length} Reviews`;
+            document.getElementById('totalReviews').innerText = data.length;
+        }
+
+        function updateGenreChart(data) {
+            const genres = {};
+            data.forEach(row => {
+                // Handle different naming variations in the sheet
+                const gStr = row['Genres of TNMC(for you)'] || row['Genres of TNMC (for you)'] || row['Genres of TNMC']; 
+                if (gStr) {
+                    gStr.split(',').forEach(g => {
+                        const cleanG = g.trim();
+                        if (cleanG) genres[cleanG] = (genres[cleanG] || 0) + 1;
+                    });
+                }
+            });
+
+            const sorted = Object.entries(genres).sort((a, b) => b[1] - a[1]);
+            
+            // Update Top Genre Stat
+            document.getElementById('topGenre').innerText = sorted.length ? sorted[0][0] : '--';
+
+            // Build Chart
+            const chartHTML = sorted.map(([name, count]) => {
+                const percent = (count / data.length) * 100;
+                return `
+                    <div class="genre-bar-item">
+                        <div class="genre-label">
+                            <span>${name}</span>
+                            <span style="color:#f5c518; font-weight:bold;">${count}</span>
+                        </div>
+                        <div class="genre-bar-bg">
+                            <div class="genre-bar-fill" style="width: ${percent}%"></div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+            document.getElementById('genreChart').innerHTML = chartHTML;
+        }
+
+        // --- 3. REVIEWS & DETAILS RENDERER ---
+        function renderReviews(append = false) {
+            const container = document.getElementById('reviewsContainer');
+            if (!append) {
+                container.innerHTML = '';
+                displayedCount = 0;
+            }
+
+            const slice = filteredReviews.slice(displayedCount, displayedCount + CONFIG.reviewsPerLoad);
+            
+            slice.forEach(review => {
+                // Map Data safely
+                const rating = review['Overall Rating'] || '0';
+                const role = review['Your Role'] || 'Student';
+                const batch = review['Batch'] || 'N/A';
+                const oneLiner = review['Write a one line Review of TNMC'] || '';
+                
+                // Detailed Text Boxes
+                const pros = review['Pros (what works)'] || '';
+                const cons = review['Cons (What needs improvement)'] || '';
+                const best = review['Best thing about TNMC'] || '';
+                const improve = review['One thing TNMC desperately needs to improve'] || '';
+
+                // Build Ratings Array
+                const ratingFields = [
+                    { label: 'Infrastructure', val: review['College Infrastructure'] },
+                    { label: 'Academics', val: review['College Academics'] },
+                    { label: 'Fests & Events', val: review['Fests and Events'] },
+                    { label: 'Seniors', val: review['Seniors'] },
+                    { label: 'Juniors', val: review['Juniors'] },
+                    { label: 'Batchmates', val: review['Batchmates'] },
+                    { label: 'Canteen Food', val: review['Canteen food'] },
+                    { label: 'Hostels', val: review['Hostels'] },
+                    { label: 'Hospital', val: review['Hospital Ambience'] }
+                ];
+
+                // Create Card HTML
+                const card = document.createElement('div');
+                card.className = 'review-card';
+                card.innerHTML = `
+                    <div class="review-top">
+                        <div class="review-user-info">
+                            <div class="user-avatar">${role.charAt(0)}</div>
+                            <div class="user-details">
+                                <div class="user-role">${role}</div>
+                                <div class="user-batch">Batch of ${batch}</div>
+                            </div>
+                        </div>
+                        <div class="user-rating-badge">★ ${rating}/10</div>
+                    </div>
+
+                    ${oneLiner ? `<div class="one-line-review">"${oneLiner}"</div>` : ''}
+
+                    <div class="review-text-grid">
+                        ${best ? `<div class="text-box best"><div class="box-label">Best Thing</div><div class="box-content">${best}</div></div>` : ''}
+                        ${improve ? `<div class="text-box improve"><div class="box-label">Needs Improve</div><div class="box-content">${improve}</div></div>` : ''}
+                        ${pros ? `<div class="text-box pros"><div class="box-label">Pros</div><div class="box-content">${pros}</div></div>` : ''}
+                        ${cons ? `<div class="text-box cons"><div class="box-label">Cons</div><div class="box-content">${cons}</div></div>` : ''}
+                    </div>
+
+                    <div class="detailed-ratings">
+                        <div class="ratings-title">Detailed Ratings Breakdown</div>
+                        <div class="ratings-grid">
+                            ${ratingFields.map(item => {
+                                const val = parseInt(item.val) || 0;
+                                if(val === 0) return '';
+                                // Color logic based on score
+                                let color = '#f5c518';
+                                if(val < 5) color = '#f87171';
+                                if(val >= 8) color = '#4ade80';
+                                
+                                return `
+                                <div class="mini-rating-item">
+                                    <div class="mini-rating-header">
+                                        <span>${item.label}</span>
+                                        <span style="color:${color}">${val}</span>
+                                    </div>
+                                    <div class="mini-bar-bg">
+                                        <div class="mini-bar-fill" style="width:${val * 10}%; background:${color};"></div>
+                                    </div>
+                                </div>`;
+                            }).join('')}
+                        </div>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+
+            displayedCount += slice.length;
+            
+            // Handle Load More Button
+            const btn = document.getElementById('loadMoreBtn');
+            btn.style.display = displayedCount < filteredReviews.length ? 'block' : 'none';
+        }
+
+        // --- 4. FILTERS ---
+        function populateFilters(data) {
+            const batches = [...new Set(data.map(r => r['Batch']).filter(Boolean))].sort();
+            const roles = [...new Set(data.map(r => r['Your Role']).filter(Boolean))].sort();
+
+            const batchSelect = document.getElementById('batchFilter');
+            batches.forEach(b => {
+                const opt = document.createElement('option');
+                opt.value = b;
+                opt.innerText = b;
+                batchSelect.appendChild(opt);
+            });
+
+            const roleSelect = document.getElementById('roleFilter');
+            roles.forEach(r => {
+                const opt = document.createElement('option');
+                opt.value = r;
+                opt.innerText = r;
+                roleSelect.appendChild(opt);
+            });
+
+            // Add Event Listeners
+            batchSelect.addEventListener('change', applyFilters);
+            roleSelect.addEventListener('change', applyFilters);
+            document.getElementById('loadMoreBtn').addEventListener('click', () => renderReviews(true));
+        }
+
+        function applyFilters() {
+            const batchVal = document.getElementById('batchFilter').value;
+            const roleVal = document.getElementById('roleFilter').value;
+
+            filteredReviews = allReviews.filter(r => {
+                const batchMatch = batchVal === 'all' || r['Batch'] === batchVal;
+                const roleMatch = roleVal === 'all' || r['Your Role'] === roleVal;
+                return batchMatch && roleMatch;
+            });
+
+            renderReviews(false);
+        }
+
+        // --- START ---
+        window.addEventListener('DOMContentLoaded', init);
+
+    </script>
+</body>
+</html>
