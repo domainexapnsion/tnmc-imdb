@@ -327,39 +327,102 @@
             color: #000;
         }
 
-        .reviews-container {
-            position: relative;
-            min-height: 400px;
-            padding: 20px 0;
+        .reviews-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+            gap: 15px;
         }
 
-        .review-bubble {
-            background: linear-gradient(135deg, #1a1a1a 0%, #252525 100%);
-            padding: 25px;
-            border-radius: 20px;
+        .reviews-controls {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .filter-select {
+            background: #1a1a1a;
+            color: #fff;
             border: 1px solid #333;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
-            margin-bottom: 25px;
-            max-width: 650px;
-            position: relative;
-            animation: fadeInUp 0.6s ease-out;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
             transition: all 0.3s;
         }
 
-        .review-bubble:hover {
-            transform: translateY(-5px);
+        .filter-select:hover {
+            border-color: #f5c518;
+        }
+
+        .reviews-counter {
+            color: #888;
+            font-size: 14px;
+            padding: 10px 20px;
+            background: #1a1a1a;
+            border-radius: 8px;
+            border: 1px solid #333;
+        }
+
+        .reviews-container {
+            position: relative;
+            min-height: 400px;
+        }
+
+        .review-card {
+            background: linear-gradient(135deg, #1a1a1a 0%, #252525 100%);
+            padding: 25px;
+            border-radius: 12px;
+            border: 1px solid #333;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+            margin-bottom: 20px;
+            transition: all 0.3s;
+        }
+
+        .review-card:hover {
+            transform: translateY(-3px);
             border-color: #f5c518;
             box-shadow: 0 8px 30px rgba(245, 197, 24, 0.2);
         }
 
-        .review-bubble:nth-child(odd) {
-            margin-left: 0;
-            margin-right: auto;
+        .review-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #333;
         }
 
-        .review-bubble:nth-child(even) {
-            margin-left: auto;
-            margin-right: 0;
+        .review-meta {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .review-rating {
+            background: #f5c518;
+            color: #000;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-weight: 700;
+            font-size: 18px;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .review-role {
+            color: #888;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .review-batch {
+            color: #f5c518;
+            font-weight: 600;
+            font-size: 14px;
         }
 
         .review-main-text {
@@ -376,6 +439,7 @@
 
         .review-details {
             display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 12px;
         }
 
@@ -402,6 +466,18 @@
             --box-color: #fbbf24;
         }
 
+        .review-detail-box.infrastructure {
+            --box-color: #a78bfa;
+        }
+
+        .review-detail-box.academics {
+            --box-color: #2dd4bf;
+        }
+
+        .review-detail-box.fests {
+            --box-color: #fb923c;
+        }
+
         .detail-label {
             font-size: 11px;
             font-weight: 700;
@@ -417,6 +493,31 @@
             line-height: 1.5;
         }
 
+        .load-more-btn {
+            display: block;
+            margin: 30px auto;
+            background: #1a1a1a;
+            color: #f5c518;
+            border: 2px solid #f5c518;
+            padding: 15px 40px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .load-more-btn:hover {
+            background: #f5c518;
+            color: #000;
+            transform: translateY(-2px);
+        }
+
+        .load-more-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
         .loading {
             text-align: center;
             padding: 40px;
@@ -430,6 +531,13 @@
             padding: 20px;
             border-radius: 8px;
             margin: 20px 0;
+        }
+
+        .no-reviews {
+            text-align: center;
+            padding: 60px 20px;
+            color: #666;
+            font-size: 18px;
         }
 
         @keyframes fadeInUp {
@@ -471,10 +579,17 @@
                 font-size: 26px;
             }
 
-            .review-bubble:nth-child(odd),
-            .review-bubble:nth-child(even) {
-                margin-left: auto;
-                margin-right: auto;
+            .reviews-header {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .reviews-controls {
+                flex-direction: column;
+            }
+
+            .filter-select {
+                width: 100%;
             }
         }
     </style>
@@ -483,7 +598,7 @@
     <div class="header">
         <div class="container">
             <div class="logo-container">
-                <img src="logo.jpg" alt="TNMC Logo" class="logo-img">
+                <img src="logo.jpg" alt="TNMC Logo" class="logo-img" onerror="this.style.display='none'">
                 <div>
                     <div class="site-title">TNMC IMDb</div>
                     <p class="site-subtitle">Topiwala National Medical College</p>
@@ -495,7 +610,7 @@
     <div class="container">
         <div class="title-section">
             <div class="poster">
-                <img src="poster.jpg" alt="TNMC Poster" class="poster-img">
+                <img src="poster.jpg" alt="TNMC Poster" class="poster-img" onerror="this.style.display='none'">
             </div>
             <div class="title-info">
                 <h1>TNMC Experience</h1>
@@ -595,10 +710,27 @@
         </div>
 
         <div class="section">
-            <h2 class="section-title">Student Reviews</h2>
+            <div class="reviews-header">
+                <h2 class="section-title" style="margin: 0; border: none; padding: 0;">Student Reviews</h2>
+                <div class="reviews-controls">
+                    <select id="batchFilter" class="filter-select">
+                        <option value="all">All Batches</option>
+                    </select>
+                    <select id="roleFilter" class="filter-select">
+                        <option value="all">All Roles</option>
+                    </select>
+                    <select id="sortFilter" class="filter-select">
+                        <option value="recent">Most Recent</option>
+                        <option value="highest">Highest Rated</option>
+                        <option value="lowest">Lowest Rated</option>
+                    </select>
+                    <div class="reviews-counter" id="reviewsCounter">0 reviews</div>
+                </div>
+            </div>
             <div class="reviews-container" id="reviewsContainer">
                 <div class="loading">Loading reviews...</div>
             </div>
+            <button id="loadMoreBtn" class="load-more-btn" style="display: none;">Load More Reviews</button>
         </div>
     </div>
 
@@ -606,33 +738,22 @@
         const CONFIG = {
             sheetUrl: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQhOAM8mXKtaI0T8AvczN3NTZz9KBBZSYZl3E-SLS-Ie8kwCWFi1kpLyyl9NZAUwj379VNI76rv3lSm/pub?gid=1704629096&single=true&output=csv',
             refreshInterval: 300000,
-            maxReviews: 30
-        };
-
-        const COLUMNS = {
-            rating: 'Overall Rating',
-            genre: 'Genres of TNMC',
-            review: 'Write a one line Review of TNMC',
-            pros: 'Pros (what works)',
-            cons: 'Cons (What needs improvement)',
-            best: 'Best thing about TNMC',
-            improve: 'One thing TNMC desperately needs to improve'
+            initialReviewsToShow: 10,
+            reviewsPerLoad: 10
         };
 
         class DataManager {
             async fetchData() {
                 try {
+                    console.log('Fetching data from:', CONFIG.sheetUrl);
                     const response = await fetch(CONFIG.sheetUrl);
                     if (!response.ok) {
                         throw new Error(`HTTP Error: ${response.status}`);
                     }
                     const csvText = await response.text();
+                    console.log('CSV length:', csvText.length);
                     const data = this.parseCSV(csvText);
-                    
-                    if (data.length > 0) {
-                        this.autoDetectHeaders(data[0]);
-                    }
-                    
+                    console.log('Parsed data rows:', data.length);
                     return data;
                 } catch (error) {
                     console.error('Error fetching data:', error);
@@ -664,7 +785,7 @@
                         currentField = '';
                     } else if (char === '\n' && !insideQuotes) {
                         currentRow.push(currentField.trim());
-                        if (currentRow.length > 0) {
+                        if (currentRow.some(cell => cell.length > 0)) {
                             rows.push(currentRow);
                         }
                         currentRow = [];
@@ -676,34 +797,26 @@
 
                 if (currentField || currentRow.length > 0) {
                     currentRow.push(currentField.trim());
-                    rows.push(currentRow);
+                    if (currentRow.some(cell => cell.length > 0)) {
+                        rows.push(currentRow);
+                    }
                 }
 
                 if (rows.length === 0) return [];
 
                 const headers = rows[0].map(h => h.replace(/^"|"$/g, '').trim());
-                return rows.slice(1).map(row => {
+                console.log('CSV Headers:', headers);
+                
+                const data = rows.slice(1).map((row, index) => {
                     const obj = {};
-                    headers.forEach((header, index) => {
-                        obj[header] = row[index] ? row[index].replace(/^"|"$/g, '').trim() : '';
+                    headers.forEach((header, idx) => {
+                        obj[header] = row[idx] ? row[idx].replace(/^"|"$/g, '').trim() : '';
                     });
                     return obj;
-                });
-            }
+                }).filter(row => Object.values(row).some(val => val.length > 0));
 
-            autoDetectHeaders(firstRow) {
-                const realHeaders = Object.keys(firstRow);
-                const find = (word) => realHeaders.find(h => h.toLowerCase().includes(word.toLowerCase()));
-
-                if (find('rating')) COLUMNS.rating = find('rating');
-                if (find('genre')) COLUMNS.genre = find('genre');
-                if (find('review')) COLUMNS.review = find('review');
-                if (find('pros')) COLUMNS.pros = find('pros');
-                if (find('cons')) COLUMNS.cons = find('cons');
-                if (find('best')) COLUMNS.best = find('best');
-                if (find('improve')) COLUMNS.improve = find('improve');
-
-                console.log('Detected columns:', COLUMNS);
+                console.log('Sample row:', data[0]);
+                return data;
             }
         }
 
@@ -716,13 +829,22 @@
                     avgScore: document.getElementById('avgScore'),
                     topGenresText: document.getElementById('topGenresText'),
                     genreChart: document.getElementById('genreChart'),
-                    reviewsContainer: document.getElementById('reviewsContainer')
+                    reviewsContainer: document.getElementById('reviewsContainer'),
+                    batchFilter: document.getElementById('batchFilter'),
+                    roleFilter: document.getElementById('roleFilter'),
+                    sortFilter: document.getElementById('sortFilter'),
+                    reviewsCounter: document.getElementById('reviewsCounter'),
+                    loadMoreBtn: document.getElementById('loadMoreBtn')
                 };
+                
+                this.allReviews = [];
+                this.filteredReviews = [];
+                this.displayedReviewsCount = 0;
             }
 
             updateRatings(data) {
                 const ratings = data
-                    .map(row => parseInt(row[COLUMNS.rating]))
+                    .map(row => parseInt(row['Overall Rating']))
                     .filter(r => !isNaN(r) && r > 0);
 
                 const avgRating = ratings.length > 0
@@ -740,8 +862,9 @@
             updateGenres(data) {
                 const allGenres = [];
                 data.forEach(row => {
-                    if (row[COLUMNS.genre]) {
-                        const genresInRow = row[COLUMNS.genre]
+                    const genreField = row['Genres of TNMC'];
+                    if (genreField) {
+                        const genresInRow = genreField
                             .split(',')
                             .map(g => g.trim())
                             .filter(g => g && g.length > 0);
@@ -774,103 +897,4 @@
                             <div class="genre-bar-item">
                                 <div class="genre-label">
                                     <span class="genre-name">${genre}</span>
-                                    <span class="genre-count">${count} votes</span>
-                                </div>
-                                <div class="genre-bar-bg">
-                                    <div class="genre-bar-fill" style="width: ${percentage}%">
-                                        ${Math.round(percentage)}%
-                                    </div>
-                                </div>
-                            </div>
-                        `;
-                    }).join('');
-                } else {
-                    this.elements.genreChart.innerHTML = '<div class="loading">No genre data yet</div>';
-                }
-            }
-
-            updateReviews(data) {
-                const validReviews = data.filter(row => 
-                    row[COLUMNS.review] && row[COLUMNS.review].trim().length > 0
-                );
-
-                if (validReviews.length === 0) {
-                    this.elements.reviewsContainer.innerHTML = 
-                        '<div class="loading">No reviews found yet. Be the first!</div>';
-                    return;
-                }
-
-                this.elements.reviewsContainer.innerHTML = validReviews
-                    .reverse()
-                    .slice(0, CONFIG.maxReviews)
-                    .map(row => this.createReviewBubble(row))
-                    .join('');
-            }
-
-            createReviewBubble(row) {
-                const reviewText = row[COLUMNS.review];
-                const pros = row[COLUMNS.pros];
-                const cons = row[COLUMNS.cons];
-                const best = row[COLUMNS.best];
-                const improve = row[COLUMNS.improve];
-
-                return `
-                    <div class="review-bubble">
-                        <div class="review-main-text">"${reviewText}"</div>
-                        <div class="review-details">
-                            ${pros ? this.createDetailBox('pros', '✓ Pros', pros) : ''}
-                            ${cons ? this.createDetailBox('cons', '✗ Cons', cons) : ''}
-                            ${best ? this.createDetailBox('best', '⭐ Best Thing', best) : ''}
-                            ${improve ? this.createDetailBox('improve', '⚠ Needs Improvement', improve) : ''}
-                        </div>
-                    </div>
-                `;
-            }
-
-            createDetailBox(className, label, text) {
-                return `
-                    <div class="review-detail-box ${className}">
-                        <div class="detail-label">${label}</div>
-                        <div class="detail-text">${text}</div>
-                    </div>
-                `;
-            }
-
-            showError(message) {
-                this.elements.reviewsContainer.innerHTML = `
-                    <div class="error-message">
-                        Unable to load reviews. ${message}
-                    </div>
-                `;
-            }
-        }
-
-        class App {
-            constructor() {
-                this.dataManager = new DataManager();
-                this.uiManager = new UIManager();
-            }
-
-            async init() {
-                await this.loadData();
-                setInterval(() => this.loadData(), CONFIG.refreshInterval);
-            }
-
-            async loadData() {
-                try {
-                    const data = await this.dataManager.fetchData();
-                    this.uiManager.updateRatings(data);
-                    this.uiManager.updateGenres(data);
-                    this.uiManager.updateReviews(data);
-                } catch (error) {
-                    console.error('Error loading data:', error);
-                    this.uiManager.showError(error.message);
-                }
-            }
-        }
-
-        const app = new App();
-        app.init();
-    </script>
-</body>
-</html>
+                                    <span class="genre-count"
